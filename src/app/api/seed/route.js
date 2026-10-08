@@ -12,7 +12,13 @@ export async function POST(request) {
     const existingAdmin = await Admin.findOne({ email });
 
     if (existingAdmin) {
-      return Response.json({ message: 'Admin already exists', email: existingAdmin.email });
+      return Response.json({ message: 'Admin already exists', email: existingAdmin.email }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      });
     }
 
     // Create admin with provided credentials
@@ -24,11 +30,36 @@ export async function POST(request) {
     return Response.json({ 
       message: 'Admin created successfully', 
       email: admin.email 
-    }, { status: 201 });
+    }, { 
+      status: 201,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
+    });
   } catch (error) {
     console.error('Seed error:', error);
-    return Response.json({ error: error.message }, { status: 500 });
+    return Response.json({ error: error.message }, { 
+      status: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
+    });
   }
+}
+
+export async function OPTIONS(request) {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }
 
 export async function GET(request) {
