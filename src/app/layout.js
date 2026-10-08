@@ -16,10 +16,22 @@ export default function RootLayout({ children }) {
               <Link href="/" className="font-serif text-2xl font-bold text-gold-600 hover:text-gold-700 transition-colors">
                 Business2Top
               </Link>
-              <div className="flex space-x-8">
+              <div className="flex space-x-8 items-center">
                 <Link href="/" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
                   Home Directory
                 </Link>
+                {/* 3D Animated Badge */}
+                <div className="relative group">
+                  <div className="relative w-16 h-16 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full animate-pulse shadow-lg shadow-gold-500/50"></div>
+                    <div className="absolute inset-1 bg-gradient-to-br from-gold-300 to-gold-500 rounded-full animate-bounce shadow-inner"></div>
+                    <div className="relative z-10 flex flex-col items-center justify-center">
+                      <span className="text-white font-bold text-lg drop-shadow-lg">#1</span>
+                      <span className="text-white text-xs font-semibold drop-shadow-md">Trusted</span>
+                    </div>
+                  </div>
+                  <div className="absolute -inset-2 bg-gold-400/20 rounded-full blur-xl animate-ping opacity-50"></div>
+                </div>
               </div>
             </div>
           </div>

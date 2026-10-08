@@ -10,6 +10,7 @@ export default function UserLogin() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,6 +45,7 @@ export default function UserLogin() {
       } else {
         setIsLogin(true);
         setError('Registration successful! Please login.');
+        setSuccess(true);
       }
     } catch (err) {
       setError(err.message);
@@ -62,8 +64,14 @@ export default function UserLogin() {
           {isLogin ? 'Login to rate businesses' : 'Create your account'}
         </p>
 
-        {error && (
+        {error && !success && (
           <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-6 text-center">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-xl mb-6 text-center">
             {error}
           </div>
         )}
