@@ -1,5 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
+import { Check } from 'lucide-react';
 
 export const metadata = {
   title: 'Business2Top - Luxury Business Directory',
@@ -27,7 +28,10 @@ export default function RootLayout({ children }) {
                     <div className="absolute inset-1 bg-gradient-to-br from-gold-300 to-gold-500 rounded-full animate-bounce shadow-inner"></div>
                     <div className="relative z-10 flex flex-col items-center justify-center">
                       <span className="text-white font-bold text-lg drop-shadow-lg">#1</span>
-                      <span className="text-white text-xs font-semibold drop-shadow-md">Trusted</span>
+                      <div className="flex items-center gap-1">
+                        <Check className="w-3 h-3 text-white fill-white" />
+                        <span className="text-white text-xs font-semibold drop-shadow-md">Elite</span>
+                      </div>
                     </div>
                   </div>
                   <div className="absolute -inset-2 bg-gold-400/20 rounded-full blur-xl animate-ping opacity-50"></div>

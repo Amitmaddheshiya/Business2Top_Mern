@@ -13,11 +13,7 @@ export async function GET(request) {
 
     if (search) {
       const searchRegex = new RegExp(search, 'i');
-      query.$or = [
-        { name: searchRegex },
-        { description: searchRegex },
-        { productsAndServices: { $in: [searchRegex] } },
-      ];
+      query.name = searchRegex;
     }
 
     // Use MongoDB sort for better performance

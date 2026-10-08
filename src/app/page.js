@@ -14,133 +14,145 @@ const BusinessCard = memo(({ business, index, onRate }) => {
   };
 
   return (
-    <div
-      className={`bg-white rounded-2xl border p-6 transition-all hover:shadow-gold-glow ${
-        isTop10
-          ? 'border-gold-400 shadow-gold-glow'
-          : 'border-gold-200 shadow-luxury'
-      }`}
-    >
-      {/* Logo */}
-      {business.logo && (
-        <div className="mb-4 flex justify-center">
-          <img
-            src={business.logo}
-            alt={`${business.name} logo`}
-            className="w-20 h-20 object-contain rounded-lg"
-            onError={(e) => e.target.style.display = 'none'}
-          />
-        </div>
-      )}
-
-      {/* Header with Title and Verification Badge */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <h3 className="text-xl font-bold text-charcoal">{business.name}</h3>
-          {business.isVerified && (
-            <div className="flex items-center gap-1 bg-blue-600 px-3 py-1 rounded-full shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-transform">
-              <CheckCircle className="w-4 h-4 text-white" />
-              <span className="text-xs font-semibold text-white">Trusted</span>
+    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1">
+      {/* Card Header with Logo and Badges */}
+      <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-6 border-b border-gold-100">
+        <div className="flex items-start gap-4">
+          {business.logo && (
+            <div className="flex-shrink-0">
+              <img
+                src={business.logo}
+                alt={business.name}
+                className="w-16 h-16 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
+                onError={(e) => e.target.style.display = 'none'}
+              />
             </div>
           )}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <h3 className="text-xl font-bold text-charcoal font-serif">{business.name}</h3>
+              <div className="flex gap-1 flex-shrink-0">
+                {business.isVerified && (
+                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
+                    <CheckCircle className="w-3 h-3 text-white" />
+                    <span className="text-xs font-semibold text-white">Elite</span>
+                  </div>
+                )}
+                {business.manualRank !== null && (
+                  <span className="bg-gradient-to-r from-gold-500 to-gold-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md shadow-gold-500/20">
+                    #{business.manualRank}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
+                <Star className="w-4 h-4 text-gold-500 fill-gold-500" />
+                <span className="font-bold text-gold-600">{business.averageRating.toFixed(1)}</span>
+                <span className="text-xs text-softgray">({business.totalVotes})</span>
+              </div>
+            </div>
+          </div>
         </div>
-        {business.manualRank !== null && (
-          <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-transform">
-            #{business.manualRank}
-          </span>
+      </div>
+
+      {/* Card Body */}
+      <div className="p-6 space-y-4">
+        {/* Description */}
+        {business.description && (
+          <p className="text-softgray text-sm leading-relaxed line-clamp-2">{business.description}</p>
         )}
-      </div>
 
-      {/* Rating Display */}
-      <div className="flex items-center gap-2 mb-4">
-        <div className="bg-gold-50 border border-gold-200 rounded-lg px-3 py-2">
-          <span className="text-lg font-bold text-gold-600">
-            {business.averageRating.toFixed(1)}
-          </span>
-          <span className="text-sm text-softgray"> / 5</span>
-          <Star className="w-4 h-4 text-gold-500 inline ml-1 fill-gold-500" />
+        {/* Products & Services */}
+        {business.productsAndServices && business.productsAndServices.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Services</p>
+            <div className="flex flex-wrap gap-2">
+              {business.productsAndServices.slice(0, 4).map((tag, idx) => (
+                <span
+                  key={idx}
+                  className="text-xs bg-gold-50 text-gold-700 px-3 py-1.5 rounded-lg border border-gold-200 font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+              {business.productsAndServices.length > 4 && (
+                <span className="text-xs text-softgray px-2 py-1.5">+{business.productsAndServices.length - 4} more</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Contact Information */}
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-charcoal uppercase tracking-wide">Contact</p>
+          <div className="space-y-1.5 text-sm">
+            <p className="flex items-center gap-2 text-softgray">
+              <span className="w-16 font-medium text-charcoal">Phone:</span>
+              <span className="font-medium text-charcoal">{business.contactNumber}</span>
+            </p>
+            {business.email && (
+              <p className="flex items-center gap-2 text-softgray">
+                <span className="w-16 font-medium text-charcoal">Email:</span>
+                <span className="text-charcoal">{business.email}</span>
+              </p>
+            )}
+            <p className="flex items-start gap-2 text-softgray">
+              <span className="w-16 font-medium text-charcoal mt-0.5">Address:</span>
+              <span className="text-charcoal">{business.address}</span>
+            </p>
+          </div>
         </div>
-        <span className="text-sm text-softgray">({business.totalVotes} votes)</span>
+
+        {/* Rating Section */}
+        <div className="pt-4 border-t border-gold-100">
+          <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Rate this business</p>
+          <div className="flex gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onClick={() => onRate(business._id, star)}
+                className="hover:scale-110 transition-transform"
+              >
+                <Star
+                  className={`w-6 h-6 ${
+                    business.isRated
+                      ? 'text-gold-500 fill-gold-500'
+                      : 'text-gray-300'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Interactive Star Rating */}
-      <div className="flex gap-1 mb-4">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <button
-            key={star}
-            onClick={() => onRate(business._id, star)}
-            className="hover:scale-110 transition-transform"
-          >
-            <Star
-              className={`w-5 h-5 ${
-                business.isRated
-                  ? 'text-gold-500 fill-gold-500'
-                  : 'text-gray-300'
-              }`}
-            />
-          </button>
-        ))}
-      </div>
-
-      {/* Description */}
-      {business.description && (
-        <p className="text-softgray text-sm mb-4 line-clamp-2">{business.description}</p>
-      )}
-
-      {/* Products & Services Tags */}
-      {business.productsAndServices && business.productsAndServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-4">
-          {business.productsAndServices.map((tag, idx) => (
-            <span
-              key={idx}
-              className="text-xs bg-ivory-100 text-charcoal px-2 py-1 rounded-full"
+      {/* Card Footer */}
+      <div className="px-6 py-4 bg-gold-50 border-t border-gold-100">
+        <div className="flex gap-2">
+          {business.website && (
+            <a
+              href={business.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-charcoal text-white rounded-xl hover:bg-gold-600 transition-all duration-200 font-medium text-sm"
             >
-              {tag}
-            </span>
-          ))}
+              <Globe className="w-4 h-4" />
+              Visit Website
+            </a>
+          )}
+          {business.whatsappNumber && (
+            <a
+              href={`https://wa.me/${business.whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-medium text-sm"
+            >
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp
+            </a>
+          )}
         </div>
-      )}
-
-      {/* Contact Info */}
-      <div className="space-y-2 mb-4 text-sm text-softgray">
-        <p className="flex items-center gap-2">
-          <span className="font-medium text-charcoal">Address:</span>
-          {business.address}
-        </p>
-        <p className="flex items-center gap-2">
-          <span className="font-medium text-charcoal">Phone:</span>
-          {business.contactNumber}
-        </p>
-        {business.email && (
-          <p className="flex items-center gap-2">
-            <span className="font-medium text-charcoal">Email:</span>
-            {business.email}
-          </p>
-        )}
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-2">
-        {business.website && (
-          <a
-            href={business.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-charcoal text-white rounded-xl hover:bg-gold-600 transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" />
-            Website
-          </a>
-        )}
-        <a
-          href={getWhatsAppLink(business.whatsappNumber, business.name)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors"
-        >
-          <MessageCircle className="w-4 h-4" />
-          WhatsApp
-        </a>
       </div>
     </div>
   );
@@ -151,22 +163,22 @@ BusinessCard.displayName = 'BusinessCard';
 export default function Home() {
   const [businesses, setBusinesses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortFilter, setSortFilter] = useState('');
   const [loading, setLoading] = useState(true);
-
-  // Debounce search term
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
 
   const fetchBusinesses = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/businesses');
+      const params = new URLSearchParams();
+      if (searchTerm) {
+        params.append('search', searchTerm);
+      }
+      if (sortFilter) {
+        params.append('sort', sortFilter);
+      }
+      
+      const url = `/api/businesses${params.toString() ? '?' + params.toString() : ''}`;
+      const response = await fetch(url);
       const data = await response.json();
       if (Array.isArray(data)) {
         const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
@@ -185,7 +197,7 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [searchTerm, sortFilter]);
 
   useEffect(() => {
     fetchBusinesses();
