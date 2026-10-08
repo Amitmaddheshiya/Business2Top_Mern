@@ -5,17 +5,20 @@ export async function POST(request) {
   try {
     await dbConnect();
 
+    const body = await request.json();
+    const { email, password } = body;
+
     // Check if admin already exists
-    const existingAdmin = await Admin.findOne({ email: 'amitnextview@gmail.com' });
+    const existingAdmin = await Admin.findOne({ email });
 
     if (existingAdmin) {
       return Response.json({ message: 'Admin already exists', email: existingAdmin.email });
     }
 
-    // Create default admin
+    // Create admin with provided credentials
     const admin = await Admin.create({
-      email: 'amitnextview@gmail.com',
-      password: 'amit@1122',
+      email,
+      password,
     });
 
     return Response.json({ 
