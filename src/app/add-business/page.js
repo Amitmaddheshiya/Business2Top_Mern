@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+	import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -20,6 +20,15 @@ export default function AddBusiness() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    const ownerId = localStorage.getItem('ownerId');
+    const isOwnerLoggedIn = localStorage.getItem('isOwnerLoggedIn');
+    
+    if (!ownerId || isOwnerLoggedIn !== 'true') {
+      router.push('/owner-login');
+    }
+  }, []);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,6 +40,8 @@ export default function AddBusiness() {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    const ownerId = localStorage.getItem('ownerId');
 
     // Parse comma-separated products/services into array
     const productsArray = formData.productsAndServices
@@ -47,14 +58,16 @@ export default function AddBusiness() {
         body: JSON.stringify({
           ...formData,
           productsAndServices: productsArray,
+          ownerId,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create business');
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to create business');
       }
 
-      router.push('/');
+      router.push('/owner-dashboard');
     } catch (err) {
       setError(err.message);
     } finally {

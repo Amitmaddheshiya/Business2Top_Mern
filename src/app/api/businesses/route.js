@@ -51,6 +51,23 @@ export async function POST(request) {
     await dbConnect();
 
     const body = await request.json();
+    const { ownerId } = body;
+
+    if (!ownerId) {
+      return Response.json({ error: 'Owner must be logged in to create a business' }, { status: 401 });
+    }
+
+    const BusinessOwner = (await import('@/models/BusinessOwner')).default;
+    const owner = await BusinessOwner.findById(ownerId);
+
+    if (!owner) {
+      return Response.json({ error: 'Owner not found' }, { status: 404 });
+    }
+
+    // Check if owner already has a business
+    if (owner.businessId) {
+      return Response.json({ error: 'You can only create one business per account' }, { status: 400 });
+    }
 
     const business = await Business.create({
       name: body.name,
@@ -60,6 +77,7 @@ export async function POST(request) {
       email: body.email || '',
       website: body.website || '',
       logo: body.logo || '',
+      ownerId: ownerId,
       description: body.description || '',
       productsAndServices: body.productsAndServices || [],
       ratings: [],
@@ -69,6 +87,10 @@ export async function POST(request) {
       manualRank: null,
       createdAt: Date.now(),
     });
+
+    // Link business to owner
+    owner.businessId = business._id;
+    await owner.save();
 
     return Response.json(business, { status: 201 });
   } catch (error) {

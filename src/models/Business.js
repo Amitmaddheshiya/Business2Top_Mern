@@ -26,6 +26,11 @@ const BusinessSchema = new mongoose.Schema({
   logo: {
     type: String,
   },
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BusinessOwner',
+    default: null,
+  },
   description: {
     type: String,
   },

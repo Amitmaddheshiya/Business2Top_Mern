@@ -191,11 +191,31 @@ export default function Home() {
 
   const handleRate = useCallback(async (businessId, rating) => {
     try {
+      const userId = localStorage.getItem('userId');
+      
+      if (!userId) {
+        alert('Please login to rate businesses');
+        router.push('/user-login');
+        return;
+      }
+
+      const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
+      
+      if (ratedBusinesses.includes(businessId)) {
+        alert('You have already rated this business');
+        return;
+      }
+
       await fetch(`/api/businesses/${businessId}/rate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rating }),
+        body: JSON.stringify({ rating, userId }),
       });
+      
+      // Update local storage
+      ratedBusinesses.push(businessId);
+      localStorage.setItem('ratedBusinesses', JSON.stringify(ratedBusinesses));
+      
       fetchBusinesses();
     } catch (error) {
       console.error('Error rating business:', error);
@@ -205,6 +225,25 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-ivory-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-charcoal font-serif">Business2Top</h1>
+          <div className="flex gap-4">
+            <Link
+              href="/user-login"
+              className="px-4 py-2 border border-gold-200 text-charcoal rounded-xl hover:border-gold-500 hover:bg-gold-50 transition-colors font-medium"
+            >
+              User Login
+            </Link>
+            <Link
+              href="/owner-login"
+              className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
+            >
+              Business Owner
+            </Link>
+          </div>
+        </div>
+
         {/* Search & Filter Section */}
         <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-gold-200 shadow-luxury p-6 mb-8">
           <div className="flex flex-col md:flex-row gap-4 items-center">
