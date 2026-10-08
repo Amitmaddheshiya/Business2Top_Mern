@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, memo } from 'react';
-import { Search, Star, ExternalLink, MessageCircle, CheckCircle } from 'lucide-react';
+import { Search, Star, Globe, MessageCircle, CheckCircle, Check } from 'lucide-react';
 import Link from 'next/link';
 
 const BusinessCard = memo(({ business, index, onRate }) => {
@@ -14,7 +14,24 @@ const BusinessCard = memo(({ business, index, onRate }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1">
+    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
+      {/* #1 Elite Badge - Top Right */}
+      {(business.manualRank === 1 || business.isVerified) && (
+        <div className="absolute top-4 right-4 z-10">
+          <div className="relative w-12 h-12 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full animate-pulse shadow-lg shadow-gold-500/50"></div>
+            <div className="absolute inset-1 bg-gradient-to-br from-gold-300 to-gold-500 rounded-full animate-bounce shadow-inner"></div>
+            <div className="relative z-10 flex flex-col items-center justify-center">
+              <span className="text-white font-bold text-sm drop-shadow-lg">#1</span>
+              <div className="flex items-center gap-0.5">
+                <Check className="w-2 h-2 text-white fill-white" />
+                <span className="text-white text-xs font-semibold drop-shadow-md">Elite</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Card Header with Logo and Badges */}
       <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-6 border-b border-gold-100">
         <div className="flex items-start gap-4">
@@ -38,7 +55,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
                     <span className="text-xs font-semibold text-white">Elite</span>
                   </div>
                 )}
-                {business.manualRank !== null && (
+                {business.manualRank !== null && business.manualRank !== 1 && (
                   <span className="bg-gradient-to-r from-gold-500 to-gold-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md shadow-gold-500/20">
                     #{business.manualRank}
                   </span>
