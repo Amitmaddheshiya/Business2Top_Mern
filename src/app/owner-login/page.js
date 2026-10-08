@@ -41,8 +41,20 @@ export default function OwnerLogin() {
         localStorage.setItem('businessId', data.businessId || '');
         localStorage.setItem('isOwnerLoggedIn', 'true');
 
-        if (data.businessId) {
-          router.push('/owner-dashboard');
+        // Check if this owner has any businesses
+        const businessesResponse = await fetch('/api/businesses');
+        const businesses = await businessesResponse.json();
+        
+        if (Array.isArray(businesses)) {
+          const ownerBusinesses = businesses.filter(b => b.ownerId === data.ownerId);
+          
+          if (ownerBusinesses.length > 0) {
+            // Owner has businesses, go to dashboard
+            router.push('/owner-dashboard');
+          } else {
+            // No businesses, go to add business
+            router.push('/add-business');
+          }
         } else {
           router.push('/add-business');
         }

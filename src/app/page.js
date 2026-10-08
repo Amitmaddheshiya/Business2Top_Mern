@@ -227,20 +227,12 @@ export default function Home() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-charcoal font-serif">Business2Top</h1>
-          <div className="flex gap-4">
-            <Link
-              href="/user-login"
-              className="px-4 py-2 border border-gold-200 text-charcoal rounded-xl hover:border-gold-500 hover:bg-gold-50 transition-colors font-medium"
-            >
-              User Login
-            </Link>
-            <Link
-              href="/owner-login"
-              className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
-            >
-              Business Owner
-            </Link>
-          </div>
+          <Link
+            href="/owner-login"
+            className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
+          >
+            Business Owner Login
+          </Link>
         </div>
 
         {/* Search & Filter Section */}
@@ -309,7 +301,7 @@ export default function Home() {
           <div className="text-center py-12">
             <p className="text-softgray text-lg">No businesses found. Be the first to add one!</p>
             <Link
-              href="/add-business"
+              href="/owner-login"
               className="inline-block mt-4 px-6 py-3 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors"
             >
               Add Your Business
