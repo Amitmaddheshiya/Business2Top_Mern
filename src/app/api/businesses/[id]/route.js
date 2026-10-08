@@ -1,6 +1,23 @@
 import dbConnect from '@/lib/dbConnect';
 import Business from '@/models/Business';
 
+export async function GET(request, { params }) {
+  try {
+    await dbConnect();
+
+    const { id } = params;
+    const business = await Business.findById(id);
+
+    if (!business) {
+      return Response.json({ error: 'Business not found' }, { status: 404 });
+    }
+
+    return Response.json(business);
+  } catch (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function PUT(request, { params }) {
   try {
     await dbConnect();
