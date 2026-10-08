@@ -24,10 +24,12 @@ export default function OwnerDashboard() {
 
   const fetchBusinesses = async () => {
     try {
+      const ownerId = localStorage.getItem('ownerId');
       const response = await fetch('/api/businesses');
       const data = await response.json();
       if (Array.isArray(data)) {
-        setBusinesses(data);
+        const ownerBusinesses = data.filter(b => b.ownerId === ownerId);
+        setBusinesses(ownerBusinesses);
       } else {
         setBusinesses([]);
       }

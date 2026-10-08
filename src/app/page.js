@@ -73,7 +73,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           >
             <Star
               className={`w-5 h-5 ${
-                business.userRating && star <= business.userRating
+                business.isRated
                   ? 'text-blue-600 fill-blue-600'
                   : 'text-gray-300'
               }`}
@@ -166,12 +166,15 @@ export default function Home() {
   const fetchBusinesses = useCallback(async () => {
     setLoading(true);
     try {
-      const userId = localStorage.getItem('userId');
-      const url = userId ? `/api/businesses?userId=${userId}` : '/api/businesses';
-      const response = await fetch(url);
+      const response = await fetch('/api/businesses');
       const data = await response.json();
       if (Array.isArray(data)) {
-        setBusinesses(data);
+        const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
+        const businessesWithRating = data.map(business => ({
+          ...business,
+          isRated: ratedBusinesses.includes(business._id)
+        }));
+        setBusinesses(businessesWithRating);
       } else {
         console.error('API returned non-array data:', data);
         setBusinesses([]);
@@ -190,14 +193,6 @@ export default function Home() {
 
   const handleRate = useCallback(async (businessId, rating) => {
     try {
-      const userId = localStorage.getItem('userId');
-      
-      if (!userId) {
-        alert('Please login to rate businesses');
-        router.push('/user-login');
-        return;
-      }
-
       const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
       
       if (ratedBusinesses.includes(businessId)) {
@@ -208,7 +203,7 @@ export default function Home() {
       await fetch(`/api/businesses/${businessId}/rate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rating, userId }),
+        body: JSON.stringify({ rating }),
       });
       
       // Update local storage

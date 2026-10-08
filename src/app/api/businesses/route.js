@@ -8,7 +8,6 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search');
     const sort = searchParams.get('sort');
-    const userId = searchParams.get('userId');
 
     let query = {};
 
@@ -36,14 +35,6 @@ export async function GET(request) {
     }
 
     const businesses = await Business.find(query).sort(sortOptions).lean();
-
-    // If userId is provided, add user's rating to each business
-    if (userId) {
-      businesses.forEach(business => {
-        const userRating = business.ratings.find(r => r.userId && r.userId.toString() === userId);
-        business.userRating = userRating ? userRating.rating : null;
-      });
-    }
 
     return Response.json(businesses, {
       headers: {
@@ -73,6 +64,12 @@ export async function POST(request) {
       return Response.json({ error: 'Owner not found' }, { status: 404 });
     }
 
+    // Check if owner already has a business
+    const existingBusiness = await Business.findOne({ ownerId });
+    if (existingBusiness) {
+      return Response.json({ error: 'You can only create one business per account' }, { status: 400 });
+    }
+
     const business = await Business.create({
       name: body.name,
       contactNumber: body.contactNumber,
@@ -91,6 +88,10 @@ export async function POST(request) {
       manualRank: null,
       createdAt: Date.now(),
     });
+
+    // Link business to owner
+    owner.businessId = business._id;
+    await owner.save();
 
     return Response.json(business, { status: 201 });
   } catch (error) {

@@ -28,6 +28,24 @@ export default function AddBusiness() {
       router.push('/owner-login');
       return;
     }
+
+    // Check if owner already has a business
+    const checkOwnerBusiness = async () => {
+      try {
+        const response = await fetch('/api/businesses');
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          const ownerBusiness = data.find(b => b.ownerId === ownerId);
+          if (ownerBusiness) {
+            router.push('/owner-dashboard');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking owner business:', error);
+      }
+    };
+
+    checkOwnerBusiness();
   }, []);
 
   const handleChange = (e) => {
