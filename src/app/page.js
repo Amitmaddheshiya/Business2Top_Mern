@@ -73,8 +73,8 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           >
             <Star
               className={`w-5 h-5 ${
-                star <= Math.round(business.averageRating)
-                  ? 'text-gold-500 fill-gold-500'
+                business.userRating && star <= business.userRating
+                  ? 'text-blue-600 fill-blue-600'
                   : 'text-gray-300'
               }`}
             />
@@ -163,17 +163,12 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  useEffect(() => {
-    fetchBusinesses();
-  }, [debouncedSearchTerm, sortFilter]);
-
-  const fetchBusinesses = async () => {
+  const fetchBusinesses = useCallback(async () => {
+    setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (debouncedSearchTerm) params.append('search', debouncedSearchTerm);
-      if (sortFilter) params.append('sort', sortFilter);
-
-      const response = await fetch(`/api/businesses?${params.toString()}`);
+      const userId = localStorage.getItem('userId');
+      const url = userId ? `/api/businesses?userId=${userId}` : '/api/businesses';
+      const response = await fetch(url);
       const data = await response.json();
       if (Array.isArray(data)) {
         setBusinesses(data);
@@ -187,7 +182,11 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchBusinesses();
+  }, [fetchBusinesses]);
 
   const handleRate = useCallback(async (businessId, rating) => {
     try {

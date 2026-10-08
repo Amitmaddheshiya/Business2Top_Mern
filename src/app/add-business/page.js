@@ -26,6 +26,7 @@ export default function AddBusiness() {
     
     if (!ownerId || isOwnerLoggedIn !== 'true') {
       router.push('/owner-login');
+      return;
     }
   }, []);
 
@@ -42,6 +43,13 @@ export default function AddBusiness() {
     setError('');
 
     const ownerId = localStorage.getItem('ownerId');
+    console.log('OwnerId from localStorage:', ownerId);
+
+    if (!ownerId) {
+      setError('Please login as a business owner first');
+      router.push('/owner-login');
+      return;
+    }
 
     // Parse comma-separated products/services into array
     const productsArray = formData.productsAndServices
@@ -64,6 +72,7 @@ export default function AddBusiness() {
 
       if (!response.ok) {
         const data = await response.json();
+        console.error('API Error:', data);
         throw new Error(data.error || 'Failed to create business');
       }
 

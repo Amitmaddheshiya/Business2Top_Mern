@@ -34,11 +34,12 @@ export async function POST(request, { params }) {
       return Response.json({ error: 'You have already rated this business' }, { status: 400 });
     }
 
-    business.ratings.push(rating);
+    // Add rating with userId
+    business.ratings.push({ userId, rating });
     business.totalVotes += 1;
 
     // Calculate new average rating
-    const sum = business.ratings.reduce((acc, curr) => acc + curr, 0);
+    const sum = business.ratings.reduce((acc, curr) => acc + curr.rating, 0);
     business.averageRating = parseFloat((sum / business.ratings.length).toFixed(1));
 
     await business.save();

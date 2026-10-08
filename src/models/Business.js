@@ -39,7 +39,16 @@ const BusinessSchema = new mongoose.Schema({
     default: [],
   },
   ratings: {
-    type: [Number],
+    type: [{
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+    }],
     default: [],
   },
   averageRating: {
