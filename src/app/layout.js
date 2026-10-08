@@ -20,12 +20,6 @@ export default function RootLayout({ children }) {
                 <Link href="/" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
                   Home Directory
                 </Link>
-                <Link href="/add-business" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
-                  + Add Business
-                </Link>
-                <Link href="/admin" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
-                  Admin Panel
-                </Link>
               </div>
             </div>
           </div>
