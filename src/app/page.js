@@ -26,14 +26,14 @@ const BusinessCard = memo(({ business, index, onRate }) => {
         <div className="flex items-center gap-2">
           <h3 className="text-xl font-bold text-charcoal">{business.name}</h3>
           {business.isVerified && (
-            <div className="flex items-center gap-1 bg-gold-100 px-2 py-1 rounded-full">
-              <CheckCircle className="w-4 h-4 text-gold-600" />
-              <span className="text-xs font-semibold text-gold-600">Trusted</span>
+            <div className="flex items-center gap-1 bg-blue-600 px-3 py-1 rounded-full shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-transform">
+              <CheckCircle className="w-4 h-4 text-white" />
+              <span className="text-xs font-semibold text-white">Trusted</span>
             </div>
           )}
         </div>
         {business.manualRank !== null && (
-          <span className="bg-gold-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-transform">
             #{business.manualRank}
           </span>
         )}
