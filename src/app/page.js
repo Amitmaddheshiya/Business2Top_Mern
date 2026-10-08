@@ -222,6 +222,12 @@ export default function Home() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-charcoal font-serif">Business2Top</h1>
+          <Link
+            href="/owner-login"
+            className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
+          >
+            Business Owner Login
+          </Link>
         </div>
 
         {/* Search & Filter Section */}
