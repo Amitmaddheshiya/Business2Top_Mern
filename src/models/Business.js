@@ -1,0 +1,56 @@
+import mongoose from 'mongoose';
+
+const BusinessSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  contactNumber: {
+    type: String,
+    required: true,
+  },
+  whatsappNumber: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  website: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  productsAndServices: {
+    type: [String],
+    default: [],
+  },
+  ratings: {
+    type: [Number],
+    default: [],
+  },
+  averageRating: {
+    type: Number,
+    default: 0.0,
+  },
+  totalVotes: {
+    type: Number,
+    default: 0,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  manualRank: {
+    type: Number,
+    default: null,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+export default mongoose.models.Business || mongoose.model('Business', BusinessSchema);
