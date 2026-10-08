@@ -74,7 +74,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
             <Star
               className={`w-5 h-5 ${
                 business.isRated
-                  ? 'text-blue-600 fill-blue-600'
+                  ? 'text-gold-500 fill-gold-500'
                   : 'text-gray-300'
               }`}
             />
@@ -222,12 +222,6 @@ export default function Home() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-charcoal font-serif">Business2Top</h1>
-          <Link
-            href="/owner-login"
-            className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
-          >
-            Business Owner Login
-          </Link>
         </div>
 
         {/* Search & Filter Section */}
@@ -294,13 +288,7 @@ export default function Home() {
           </div>
         ) : businesses.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-softgray text-lg">No businesses found. Be the first to add one!</p>
-            <Link
-              href="/owner-login"
-              className="inline-block mt-4 px-6 py-3 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors"
-            >
-              Add Your Business
-            </Link>
+            <p className="text-softgray text-lg">No businesses found</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

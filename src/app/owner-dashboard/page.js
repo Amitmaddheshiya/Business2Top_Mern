@@ -114,7 +114,7 @@ export default function OwnerDashboard() {
                     <tr
                       key={business._id}
                       className="border-b border-gold-100 hover:bg-ivory-50 cursor-pointer"
-                      onClick={() => router.push(`/admin/business/${business._id}/edit`)}
+                      onClick={() => router.push(`/owner-dashboard/business/${business._id}/edit`)}
                     >
                       <td className="py-4 px-4">
                         <div className="flex items-center gap-3">
