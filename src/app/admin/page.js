@@ -132,7 +132,11 @@ export default function Admin() {
                 </thead>
                 <tbody>
                   {businesses.map((business) => (
-                    <tr key={business._id} className="border-b border-gold-100 hover:bg-ivory-50">
+                    <tr
+                      key={business._id}
+                      className="border-b border-gold-100 hover:bg-ivory-50 cursor-pointer"
+                      onClick={() => router.push(`/admin/business/${business._id}/edit`)}
+                    >
                       <td className="py-4 px-4">
                         <div>
                           <p className="font-medium text-charcoal">{business.name}</p>
@@ -148,7 +152,10 @@ export default function Admin() {
                       <td className="py-4 px-4 text-softgray">{business.totalVotes}</td>
                       <td className="py-4 px-4">
                         <button
-                          onClick={() => handleToggleVerification(business._id, business.isVerified)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleVerification(business._id, business.isVerified);
+                          }}
                           className={`p-2 rounded-lg transition-colors ${
                             business.isVerified
                               ? 'bg-gold-100 text-gold-600 hover:bg-gold-200'
@@ -163,14 +170,20 @@ export default function Admin() {
                           type="number"
                           min="1"
                           value={business.manualRank || ''}
-                          onChange={(e) => handleUpdateRank(business._id, e.target.value)}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleUpdateRank(business._id, e.target.value);
+                          }}
                           placeholder="Set rank"
                           className="w-20 px-3 py-2 rounded-lg border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all text-center"
                         />
                       </td>
                       <td className="py-4 px-4">
                         <button
-                          onClick={() => handleDelete(business._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(business._id);
+                          }}
                           className="p-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
                         >
                           <Trash2 className="w-5 h-5" />
