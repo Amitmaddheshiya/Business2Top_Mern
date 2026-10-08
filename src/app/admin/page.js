@@ -122,6 +122,7 @@ export default function Admin() {
                 <thead>
                   <tr className="border-b border-gold-200">
                     <th className="text-left py-3 px-4 text-sm font-semibold text-charcoal">Business</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-charcoal">Email</th>
                     <th className="text-left py-3 px-4 text-sm font-semibold text-charcoal">Rating</th>
                     <th className="text-left py-3 px-4 text-sm font-semibold text-charcoal">Votes</th>
                     <th className="text-left py-3 px-4 text-sm font-semibold text-charcoal">Verified</th>
@@ -138,6 +139,7 @@ export default function Admin() {
                           <p className="text-sm text-softgray">{business.contactNumber}</p>
                         </div>
                       </td>
+                      <td className="py-4 px-4 text-sm text-softgray">{business.email || '-'}</td>
                       <td className="py-4 px-4">
                         <span className="font-semibold text-gold-600">
                           {business.averageRating.toFixed(1)}

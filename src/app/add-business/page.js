@@ -11,7 +11,9 @@ export default function AddBusiness() {
     contactNumber: '',
     whatsappNumber: '',
     address: '',
+    email: '',
     website: '',
+    logo: '',
     description: '',
     productsAndServices: '',
   });
@@ -129,6 +131,18 @@ export default function AddBusiness() {
             </div>
 
             <div>
+              <label className="block text-sm font-medium text-charcoal mb-2">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
+                placeholder="business@example.com"
+              />
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-charcoal mb-2">Website</label>
               <input
                 type="url"
@@ -138,6 +152,19 @@ export default function AddBusiness() {
                 className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
                 placeholder="https://yourbusiness.com"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-charcoal mb-2">Logo URL</label>
+              <input
+                type="url"
+                name="logo"
+                value={formData.logo}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
+                placeholder="https://yourbusiness.com/logo.png"
+              />
+              <p className="text-xs text-softgray mt-1">Enter the URL of your business logo image</p>
             </div>
 
             <div>

@@ -17,7 +17,13 @@ const BusinessSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+  },
   website: {
+    type: String,
+  },
+  logo: {
     type: String,
   },
   description: {

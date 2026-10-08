@@ -21,6 +21,18 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           : 'border-gold-200 shadow-luxury'
       }`}
     >
+      {/* Logo */}
+      {business.logo && (
+        <div className="mb-4 flex justify-center">
+          <img
+            src={business.logo}
+            alt={`${business.name} logo`}
+            className="w-20 h-20 object-contain rounded-lg"
+            onError={(e) => e.target.style.display = 'none'}
+          />
+        </div>
+      )}
+
       {/* Header with Title and Verification Badge */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -99,6 +111,12 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           <span className="font-medium text-charcoal">Phone:</span>
           {business.contactNumber}
         </p>
+        {business.email && (
+          <p className="flex items-center gap-2">
+            <span className="font-medium text-charcoal">Email:</span>
+            {business.email}
+          </p>
+        )}
       </div>
 
       {/* Action Buttons */}
