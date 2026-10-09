@@ -39,6 +39,7 @@ export async function PUT(request, { params }) {
         productsAndServices: body.productsAndServices,
         isVerified: body.isVerified,
         manualRank: body.manualRank,
+        hasCrown: body.hasCrown,
       },
       { new: true }
     );

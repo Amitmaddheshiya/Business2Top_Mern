@@ -29,16 +29,6 @@ const BusinessCard = memo(({ business, index, onRate }) => {
         </div>
       )}
 
-      {/* Elite Badge with Tick - Top Right (below crown if exists, or top right if no crown) */}
-      {business.isVerified && (
-        <div className={`absolute z-10 ${business.hasCrown ? 'top-10 right-0' : 'top-0 right-0'}`}>
-          <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-bl-xl rounded-tr-xl shadow-md shadow-blue-500/20">
-            <Check className="w-3 h-3 text-white fill-white" />
-            <span className="text-xs font-semibold text-white">Elite</span>
-          </div>
-        </div>
-      )}
-
       {/* Card Header with Logo and Badges */}
       <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-6 border-b border-gold-100">
         <div className="flex items-start gap-4">
@@ -55,6 +45,14 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-2">
               <h3 className="text-xl font-bold text-charcoal font-serif">{business.name}</h3>
+              <div className="flex gap-1 flex-shrink-0">
+                {business.isVerified && (
+                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
+                    <CheckCircle className="w-3 h-3 text-white" />
+                    <span className="text-xs font-semibold text-white">Elite</span>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
