@@ -33,6 +33,7 @@ export default function ManageAds() {
     try {
       const response = await fetch('/api/ads');
       const data = await response.json();
+      console.log('Fetched ads:', data); // Debug log
       setAds(data);
     } catch (error) {
       setError('Failed to load ads');
@@ -72,13 +73,14 @@ export default function ManageAds() {
   };
 
   const handleEdit = (ad) => {
+    console.log('Editing ad:', ad); // Debug log
     setEditingAd(ad);
     setNewAd({
       brandName: ad.brandName,
       imageUrl: ad.imageUrl,
       linkUrl: ad.linkUrl,
-      offerText: ad.offerText || '',
-      subtitle: ad.subtitle || '',
+      offerText: ad.offerText ?? '',
+      subtitle: ad.subtitle ?? '',
     });
     setShowForm(true);
   };

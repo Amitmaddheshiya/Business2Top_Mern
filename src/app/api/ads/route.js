@@ -7,11 +7,14 @@ export async function GET(request) {
 
     const ads = await Ad.find({ isActive: true }).sort({ createdAt: -1 }).lean();
 
-    return Response.json(ads, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
-      },
-    });
+    // Ensure offerText and subtitle are always present
+    const adsWithDefaults = ads.map(ad => ({
+      ...ad,
+      offerText: ad.offerText || '',
+      subtitle: ad.subtitle || '',
+    }));
+
+    return Response.json(adsWithDefaults);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
