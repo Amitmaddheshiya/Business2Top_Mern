@@ -5,6 +5,7 @@ const politicians = [
   {
     name: "Office of the Prime Minister of India – Narendra Modi",
     contactNumber: "011-23012312",
+    whatsappNumber: "011-23012312",
     email: "pmosb@pmo.nic.in",
     website: "https://en.wikipedia.org/wiki/Narendra_Modi",
     logo: "https://commons.wikimedia.org/w/index.php?search=Narendra+Modi&title=Special:MediaSearch&type=image",
@@ -21,6 +22,7 @@ const politicians = [
   {
     name: "Office of Amit Shah – Ministry of Home Affairs",
     contactNumber: "011-23092015",
+    whatsappNumber: "011-23092015",
     email: "contact@mha.gov.in",
     website: "https://en.wikipedia.org/wiki/Amit_Shah",
     logo: "https://commons.wikimedia.org/w/index.php?search=Amit+Shah&title=Special:MediaSearch&type=image",
@@ -37,6 +39,7 @@ const politicians = [
   {
     name: "Office of Dr. S. Jaishankar – Ministry of External Affairs",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@mea.gov.in",
     website: "https://en.wikipedia.org/wiki/S._Jaishankar",
     logo: "https://commons.wikimedia.org/w/index.php?search=S.+Jaishankar&title=Special:MediaSearch&type=image",
@@ -53,6 +56,7 @@ const politicians = [
   {
     name: "Office of the Chief Minister of Uttar Pradesh – Yogi Adityanath",
     contactNumber: "0522-2236001",
+    whatsappNumber: "0522-2236001",
     email: "cm@up.gov.in",
     website: "https://en.wikipedia.org/wiki/Yogi_Adityanath",
     logo: "https://commons.wikimedia.org/w/index.php?search=Yogi+Adityanath&title=Special:MediaSearch&type=image",
@@ -69,6 +73,7 @@ const politicians = [
   {
     name: "Office of Piyush Goyal – Ministry of Commerce and Industry",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@commerce.gov.in",
     website: "https://en.wikipedia.org/wiki/Piyush_Goyal",
     logo: "https://commons.wikimedia.org/w/index.php?search=Piyush+Goyal&title=Special:MediaSearch&type=image",
@@ -85,6 +90,7 @@ const politicians = [
   {
     name: "Office of Rajnath Singh – Ministry of Defence",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@mod.gov.in",
     website: "https://en.wikipedia.org/wiki/Rajnath_Singh",
     logo: "https://commons.wikimedia.org/w/index.php?search=Rajnath+Singh&title=Special:MediaSearch&type=image",
@@ -101,6 +107,7 @@ const politicians = [
   {
     name: "Office of Nirmala Sitharaman – Ministry of Finance",
     contactNumber: "011-23092015",
+    whatsappNumber: "011-23092015",
     email: "contact@finmin.gov.in",
     website: "https://en.wikipedia.org/wiki/Nirmala_Sitharaman",
     logo: "https://commons.wikimedia.org/w/index.php?search=Nirmala+Sitharaman&title=Special:MediaSearch&type=image",
@@ -117,6 +124,7 @@ const politicians = [
   {
     name: "Office of Nitin Gadkari – Ministry of Road Transport and Highways",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@morth.nic.in",
     website: "https://en.wikipedia.org/wiki/Nitin_Gadkari",
     logo: "https://commons.wikimedia.org/w/index.php?search=Nitin+Gadkari&title=Special:MediaSearch&type=image",
@@ -133,6 +141,7 @@ const politicians = [
   {
     name: "Office of J. P. Nadda – Ministry of Health and Family Welfare",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@mohfw.gov.in",
     website: "https://en.wikipedia.org/wiki/J._P._Nadda",
     logo: "https://commons.wikimedia.org/w/index.php?search=JP+Nadda&title=Special:MediaSearch&type=image",
@@ -149,6 +158,7 @@ const politicians = [
   {
     name: "Office of Shivraj Singh Chouhan – Ministry of Agriculture and Farmers Welfare",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@agriwelfare.gov.in",
     website: "https://en.wikipedia.org/wiki/Shivraj_Singh_Chouhan",
     logo: "https://commons.wikimedia.org/w/index.php?search=Shivraj+Singh+Chouhan&title=Special:MediaSearch&type=image",
@@ -165,6 +175,7 @@ const politicians = [
   {
     name: "Office of Rahul Gandhi – Indian National Congress",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
     website: "https://en.wikipedia.org/wiki/Rahul_Gandhi",
     logo: "https://commons.wikimedia.org/w/index.php?search=Rahul+Gandhi&title=Special:MediaSearch&type=image",
@@ -181,6 +192,7 @@ const politicians = [
   {
     name: "Office of the Chief Minister of West Bengal – Mamata Banerjee",
     contactNumber: "033-22143300",
+    whatsappNumber: "033-22143300",
     email: "cm@wb.gov.in",
     website: "https://en.wikipedia.org/wiki/Mamata_Banerjee",
     logo: "https://commons.wikimedia.org/w/index.php?search=Mamata+Banerjee&title=Special:MediaSearch&type=image",
@@ -197,6 +209,7 @@ const politicians = [
   {
     name: "Office of Mallikarjun Kharge – Indian National Congress",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
     website: "https://en.wikipedia.org/wiki/Mallikarjun_Kharge",
     logo: "https://commons.wikimedia.org/w/index.php?search=Mallikarjun+Kharge&title=Special:MediaSearch&type=image",
@@ -213,6 +226,7 @@ const politicians = [
   {
     name: "Office of Akhilesh Yadav – Samajwadi Party",
     contactNumber: "0522-2624242",
+    whatsappNumber: "0522-2624242",
     email: "contact@samajwadiparty.in",
     website: "https://en.wikipedia.org/wiki/Akhilesh_Yadav",
     logo: "https://commons.wikimedia.org/w/index.php?search=Akhilesh+Yadav&title=Special:MediaSearch&type=image",
@@ -229,6 +243,7 @@ const politicians = [
   {
     name: "Office of the Chief Minister of Tamil Nadu – M. K. Stalin",
     contactNumber: "044-25310000",
+    whatsappNumber: "044-25310000",
     email: "cm@tn.gov.in",
     website: "https://en.wikipedia.org/wiki/M._K._Stalin",
     logo: "https://commons.wikimedia.org/w/index.php?search=MK+Stalin&title=Special:MediaSearch&type=image",
@@ -245,6 +260,7 @@ const politicians = [
   {
     name: "Office of Arvind Kejriwal – Aam Aadmi Party",
     contactNumber: "011-23392020",
+    whatsappNumber: "011-23392020",
     email: "contact@aamaadmiparty.org",
     website: "https://en.wikipedia.org/wiki/Arvind_Kejriwal",
     logo: "https://commons.wikimedia.org/w/index.php?search=Arvind+Kejriwal&title=Special:MediaSearch&type=image",
@@ -261,6 +277,7 @@ const politicians = [
   {
     name: "Office of Sharad Pawar – Nationalist Congress Party (Sharadchandra Pawar)",
     contactNumber: "022-22024444",
+    whatsappNumber: "022-22024444",
     email: "contact@ncpsp.in",
     website: "https://en.wikipedia.org/wiki/Sharad_Pawar",
     logo: "https://commons.wikimedia.org/w/index.php?search=Sharad+Pawar&title=Special:MediaSearch&type=image",
@@ -277,6 +294,7 @@ const politicians = [
   {
     name: "Office of the Chief Minister of Andhra Pradesh – N. Chandrababu Naidu",
     contactNumber: "0866-2429000",
+    whatsappNumber: "0866-2429000",
     email: "cm@ap.gov.in",
     website: "https://en.wikipedia.org/wiki/N._Chandrababu_Naidu",
     logo: "https://commons.wikimedia.org/w/index.php?search=Chandrababu+Naidu&title=Special:MediaSearch&type=image",
@@ -293,6 +311,7 @@ const politicians = [
   {
     name: "Office of the Chief Minister of Kerala – Pinarayi Vijayan",
     contactNumber: "0471-2323000",
+    whatsappNumber: "0471-2323000",
     email: "cm@kerala.gov.in",
     website: "https://en.wikipedia.org/wiki/Pinarayi_Vijayan",
     logo: "https://commons.wikimedia.org/w/index.php?search=Pinarayi+Vijayan&title=Special:MediaSearch&type=image",
@@ -309,6 +328,7 @@ const politicians = [
   {
     name: "Office of Tejashwi Yadav – Rashtriya Janata Dal",
     contactNumber: "0612-2233000",
+    whatsappNumber: "0612-2233000",
     email: "contact@rjd.co.in",
     website: "https://en.wikipedia.org/wiki/Tejashwi_Yadav",
     logo: "https://commons.wikimedia.org/w/index.php?search=Tejashwi+Yadav&title=Special:MediaSearch&type=image",
