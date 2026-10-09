@@ -50,23 +50,22 @@ export default function Navbar() {
               href={activeAd.linkUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex flex-1 justify-center px-4"
+              className="hidden md:flex flex-1 justify-center items-center gap-3 px-4"
             >
-              {activeAd.offerText && activeAd.offerText.trim() !== '' ? (
+              <img
+                src={activeAd.imageUrl}
+                alt={activeAd.brandName}
+                className="h-10 w-auto object-contain hover:scale-110 transition-transform duration-300"
+              />
+              {activeAd.offerText && activeAd.offerText.trim() !== '' && (
                 <div className="text-center">
-                  <p className="text-lg font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse">
+                  <p className="text-lg font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-[bounce_1s_infinite]">
                     {activeAd.offerText}
                   </p>
                   {activeAd.subtitle && activeAd.subtitle.trim() !== '' && (
-                    <p className="text-xs text-softgray animate-bounce">{activeAd.subtitle}</p>
+                    <p className="text-xs text-softgray animate-pulse">{activeAd.subtitle}</p>
                   )}
                 </div>
-              ) : (
-                <img
-                  src={activeAd.imageUrl}
-                  alt={activeAd.brandName}
-                  className="h-12 w-auto max-w-xs object-contain hover:scale-105 transition-transform"
-                />
               )}
             </a>
           )}
@@ -77,23 +76,22 @@ export default function Navbar() {
               href={activeAd.linkUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="md:hidden flex-1 mx-2"
+              className="md:hidden flex-1 flex items-center gap-2 mx-2"
             >
-              {activeAd.offerText && activeAd.offerText.trim() !== '' ? (
+              <img
+                src={activeAd.imageUrl}
+                alt={activeAd.brandName}
+                className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
+              />
+              {activeAd.offerText && activeAd.offerText.trim() !== '' && (
                 <div className="text-center">
-                  <p className="text-sm font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse truncate">
+                  <p className="text-xs font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-[bounce_1s_infinite] truncate">
                     {activeAd.offerText}
                   </p>
                   {activeAd.subtitle && activeAd.subtitle.trim() !== '' && (
-                    <p className="text-xs text-softgray animate-bounce truncate">{activeAd.subtitle}</p>
+                    <p className="text-xs text-softgray animate-pulse truncate">{activeAd.subtitle}</p>
                   )}
                 </div>
-              ) : (
-                <img
-                  src={activeAd.imageUrl}
-                  alt={activeAd.brandName}
-                  className="h-10 w-full object-contain"
-                />
               )}
             </a>
           )}
