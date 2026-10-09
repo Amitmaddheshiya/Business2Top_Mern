@@ -1,6 +1,5 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const Business = require('../src/models/Business');
+import dbConnect from '@/lib/dbConnect';
+import Business from '@/models/Business';
 
 const politicians = [
   {
@@ -325,27 +324,22 @@ const politicians = [
   }
 ];
 
-async function seedDatabase() {
+export async function POST(request) {
   try {
-    // Connect to MongoDB
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/trustmark';
-    await mongoose.connect(MONGODB_URI);
-    console.log('Connected to MongoDB');
+    await dbConnect();
 
-    // Clear existing businesses (optional - remove if you want to keep existing data)
+    // Clear existing businesses
     await Business.deleteMany({});
-    console.log('Cleared existing businesses');
 
     // Insert politicians
     const insertedBusinesses = await Business.insertMany(politicians);
-    console.log(`Inserted ${insertedBusinesses.length} politician profiles`);
 
-    console.log('Database seeded successfully!');
-    process.exit(0);
+    return Response.json({
+      message: `Successfully seeded ${insertedBusinesses.length} politician profiles`,
+      count: insertedBusinesses.length
+    });
   } catch (error) {
     console.error('Error seeding database:', error);
-    process.exit(1);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
-
-seedDatabase();
