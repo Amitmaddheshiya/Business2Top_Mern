@@ -303,19 +303,6 @@ export default function EditBusiness({ params }) {
                 </label>
               </div>
 
-              <div className="flex items-center gap-3 pt-6">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="isElite"
-                    checked={business.isElite || false}
-                    onChange={(e) => setBusiness({ ...business, isElite: e.target.checked })}
-                    className="w-5 h-5 rounded border-purple-300 text-purple-600 focus:ring-purple-500"
-                  />
-                  <span className="text-sm font-medium text-charcoal">Award Elite Badge</span>
-                </label>
-              </div>
-
               <div className="pt-4">
                 <label className="block text-sm font-medium text-charcoal mb-2">Add Fake Ratings</label>
                 <div className="flex gap-2">

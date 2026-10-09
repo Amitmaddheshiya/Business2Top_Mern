@@ -13,9 +13,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   // Crown display: top 10 auto gets crown, admin can also manually set crown on any profile
   const showCrown = business.hasCrown === true || (business.hasCrown === false && isTop10);
 
-  // Elite badge: only if admin has explicitly set isElite to true
-  const showElite = business.isElite === true;
-
   const getWhatsAppLink = (whatsappNumber, businessName) => {
     const cleanNumber = whatsappNumber.replace(/\D/g, '');
     const message = encodeURIComponent(`Hello! I found ${businessName} on TrustMark and would like to inquire about your services.`);
@@ -35,13 +32,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
       {showCrown && (
         <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-bl-lg rounded-tr-xl z-10">
           <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-yellow-400" />
-        </div>
-      )}
-
-      {/* Elite Badge - Bottom Right (admin only) */}
-      {showElite && (
-        <div className="absolute bottom-0 right-0 bg-gradient-to-r from-purple-600 to-purple-800 text-white px-2 py-1 rounded-tl-lg rounded-br-xl z-10">
-          <span className="font-bold text-xs sm:text-sm">ELITE</span>
         </div>
       )}
 

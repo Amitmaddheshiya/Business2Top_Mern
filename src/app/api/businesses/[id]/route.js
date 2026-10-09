@@ -40,7 +40,6 @@ export async function PUT(request, { params }) {
         isVerified: body.isVerified,
         manualRank: body.manualRank,
         hasCrown: body.hasCrown,
-        isElite: body.isElite,
       },
       { new: true }
     );
