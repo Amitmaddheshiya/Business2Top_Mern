@@ -32,12 +32,9 @@ const BusinessCard = memo(({ business, index, onRate }) => {
       {/* Elite Badge with Tick - Top Right (below crown) */}
       {business.isVerified && (
         <div className="absolute top-12 right-2 z-10">
-          <div className="relative w-10 h-10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-blue-600 rounded-full shadow-lg shadow-blue-500/30"></div>
-            <div className="relative z-10 flex items-center gap-1">
-              <Check className="w-3 h-3 text-white fill-white" />
-              <span className="text-xs font-semibold text-white">Elite</span>
-            </div>
+          <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
+            <Check className="w-3 h-3 text-white fill-white" />
+            <span className="text-xs font-semibold text-white">Elite</span>
           </div>
         </div>
       )}
