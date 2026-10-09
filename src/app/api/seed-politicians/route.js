@@ -16,8 +16,7 @@ const politicians = [
     totalVotes: 1250,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 1
+    hasCrown: true
   },
   {
     name: "Office of Amit Shah – Ministry of Home Affairs",
@@ -33,8 +32,7 @@ const politicians = [
     totalVotes: 980,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 2
+    hasCrown: true
   },
   {
     name: "Office of Dr. S. Jaishankar – Ministry of External Affairs",
@@ -50,8 +48,7 @@ const politicians = [
     totalVotes: 850,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 3
+    hasCrown: true
   },
   {
     name: "Office of the Chief Minister of Uttar Pradesh – Yogi Adityanath",
@@ -67,8 +64,7 @@ const politicians = [
     totalVotes: 1100,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 4
+    hasCrown: true
   },
   {
     name: "Office of Piyush Goyal – Ministry of Commerce and Industry",
@@ -84,8 +80,7 @@ const politicians = [
     totalVotes: 720,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 5
+    hasCrown: true
   },
   {
     name: "Office of Rajnath Singh – Ministry of Defence",
@@ -101,8 +96,7 @@ const politicians = [
     totalVotes: 890,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 6
+    hasCrown: true
   },
   {
     name: "Office of Nirmala Sitharaman – Ministry of Finance",
@@ -118,8 +112,7 @@ const politicians = [
     totalVotes: 950,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 7
+    hasCrown: true
   },
   {
     name: "Office of Nitin Gadkari – Ministry of Road Transport and Highways",
@@ -135,8 +128,7 @@ const politicians = [
     totalVotes: 780,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 8
+    hasCrown: true
   },
   {
     name: "Office of J. P. Nadda – Ministry of Health and Family Welfare",
@@ -152,8 +144,7 @@ const politicians = [
     totalVotes: 650,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 9
+    hasCrown: true
   },
   {
     name: "Office of Shivraj Singh Chouhan – Ministry of Agriculture and Farmers Welfare",
@@ -169,8 +160,7 @@ const politicians = [
     totalVotes: 580,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 10
+    hasCrown: true
   },
   {
     name: "Office of Rahul Gandhi – Indian National Congress",
@@ -186,8 +176,7 @@ const politicians = [
     totalVotes: 1200,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 11
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of West Bengal – Mamata Banerjee",
@@ -203,8 +192,7 @@ const politicians = [
     totalVotes: 1050,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 12
+    hasCrown: false
   },
   {
     name: "Office of Mallikarjun Kharge – Indian National Congress",
@@ -220,8 +208,7 @@ const politicians = [
     totalVotes: 920,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 13
+    hasCrown: false
   },
   {
     name: "Office of Akhilesh Yadav – Samajwadi Party",
@@ -237,8 +224,7 @@ const politicians = [
     totalVotes: 870,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 14
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Tamil Nadu – M. K. Stalin",
@@ -254,8 +240,7 @@ const politicians = [
     totalVotes: 980,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 15
+    hasCrown: false
   },
   {
     name: "Office of Arvind Kejriwal – Aam Aadmi Party",
@@ -271,8 +256,7 @@ const politicians = [
     totalVotes: 1100,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 16
+    hasCrown: false
   },
   {
     name: "Office of Sharad Pawar – Nationalist Congress Party (Sharadchandra Pawar)",
@@ -288,8 +272,7 @@ const politicians = [
     totalVotes: 750,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 17
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Andhra Pradesh – N. Chandrababu Naidu",
@@ -305,8 +288,7 @@ const politicians = [
     totalVotes: 820,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 18
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Kerala – Pinarayi Vijayan",
@@ -322,8 +304,7 @@ const politicians = [
     totalVotes: 760,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 19
+    hasCrown: false
   },
   {
     name: "Office of Tejashwi Yadav – Rashtriya Janata Dal",
@@ -339,8 +320,7 @@ const politicians = [
     totalVotes: 690,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 20
+    hasCrown: false
   }
 ];
 
