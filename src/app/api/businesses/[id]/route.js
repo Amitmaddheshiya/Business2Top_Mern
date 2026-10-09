@@ -29,8 +29,6 @@ export async function PUT(request, { params }) {
       id,
       {
         name: body.name,
-        contactNumber: body.contactNumber,
-        whatsappNumber: body.whatsappNumber,
         address: body.address,
         email: body.email,
         website: body.website,

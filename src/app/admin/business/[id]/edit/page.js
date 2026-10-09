@@ -159,32 +159,6 @@ export default function EditBusiness({ params }) {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-charcoal mb-2">Contact Number *</label>
-                <input
-                  type="tel"
-                  name="contactNumber"
-                  required
-                  value={business.contactNumber}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-charcoal mb-2">WhatsApp Number *</label>
-                <input
-                  type="tel"
-                  name="whatsappNumber"
-                  required
-                  value={business.whatsappNumber}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
-                />
-              </div>
-            </div>
-
             <div>
               <label className="block text-sm font-medium text-charcoal mb-2">Address *</label>
               <input

@@ -5,8 +5,6 @@ const Business = require('../src/models/Business');
 const politicians = [
   {
     name: "Office of the Prime Minister of India – Narendra Modi",
-    contactNumber: "011-23012312",
-    whatsappNumber: "011-23012312",
     email: "pmosb@pmo.nic.in",
     website: "https://www.pmindia.gov.in/",
     logo: "https://www.pmindia.gov.in/",
@@ -21,8 +19,6 @@ const politicians = [
   },
   {
     name: "Office of Amit Shah – Ministry of Home Affairs",
-    contactNumber: "011-23092015",
-    whatsappNumber: "011-23092015",
     email: "contact@mha.gov.in",
     website: "https://www.mha.gov.in/",
     logo: "https://www.mha.gov.in/",
@@ -37,8 +33,6 @@ const politicians = [
   },
   {
     name: "Office of Dr. S. Jaishankar – Ministry of External Affairs",
-    contactNumber: "011-23012138",
-    whatsappNumber: "011-23012138",
     email: "contact@mea.gov.in",
     website: "https://www.mea.gov.in/",
     logo: "https://www.mea.gov.in/",
@@ -53,8 +47,6 @@ const politicians = [
   },
   {
     name: "Office of the Chief Minister of Uttar Pradesh – Yogi Adityanath",
-    contactNumber: "0522-2236001",
-    whatsappNumber: "0522-2236001",
     email: "cm@up.gov.in",
     website: "https://upcmo.up.nic.in/",
     logo: "https://up.gov.in/",
@@ -69,8 +61,6 @@ const politicians = [
   },
   {
     name: "Office of Piyush Goyal – Ministry of Commerce and Industry",
-    contactNumber: "011-23063500",
-    whatsappNumber: "011-23063500",
     email: "contact@commerce.gov.in",
     website: "https://commerce.gov.in/",
     logo: "https://commerce.gov.in/",
@@ -85,8 +75,6 @@ const politicians = [
   },
   {
     name: "Office of Rajnath Singh – Ministry of Defence",
-    contactNumber: "011-23012138",
-    whatsappNumber: "011-23012138",
     email: "contact@mod.gov.in",
     website: "https://mod.gov.in/",
     logo: "https://mod.gov.in/",
@@ -101,8 +89,6 @@ const politicians = [
   },
   {
     name: "Office of Nirmala Sitharaman – Ministry of Finance",
-    contactNumber: "011-23092015",
-    whatsappNumber: "011-23092015",
     email: "contact@finmin.gov.in",
     website: "https://finmin.gov.in/",
     logo: "https://finmin.gov.in/",
@@ -117,8 +103,6 @@ const politicians = [
   },
   {
     name: "Office of Nitin Gadkari – Ministry of Road Transport and Highways",
-    contactNumber: "011-23063500",
-    whatsappNumber: "011-23063500",
     email: "contact@morth.nic.in",
     website: "https://morth.nic.in/",
     logo: "https://morth.nic.in/",
@@ -133,8 +117,6 @@ const politicians = [
   },
   {
     name: "Office of J. P. Nadda – Ministry of Health and Family Welfare",
-    contactNumber: "011-23063500",
-    whatsappNumber: "011-23063500",
     email: "contact@mohfw.gov.in",
     website: "https://mohfw.gov.in/",
     logo: "https://mohfw.gov.in/",
@@ -149,8 +131,6 @@ const politicians = [
   },
   {
     name: "Office of Shivraj Singh Chouhan – Ministry of Agriculture and Farmers Welfare",
-    contactNumber: "011-23063500",
-    whatsappNumber: "011-23063500",
     email: "contact@agriwelfare.gov.in",
     website: "https://agriwelfare.gov.in/",
     logo: "https://agriwelfare.gov.in/",
@@ -165,8 +145,6 @@ const politicians = [
   },
   {
     name: "Office of Rahul Gandhi – Indian National Congress",
-    contactNumber: "011-23012138",
-    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
     website: "https://inc.in/",
     logo: "https://inc.in/",
@@ -181,8 +159,6 @@ const politicians = [
   },
   {
     name: "Office of the Chief Minister of West Bengal – Mamata Banerjee",
-    contactNumber: "033-22143300",
-    whatsappNumber: "033-22143300",
     email: "cm@wb.gov.in",
     website: "https://wb.gov.in/",
     logo: "https://aitcofficial.org/",
@@ -197,8 +173,6 @@ const politicians = [
   },
   {
     name: "Office of Mallikarjun Kharge – Indian National Congress",
-    contactNumber: "011-23012138",
-    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
     website: "https://inc.in/",
     logo: "https://inc.in/",
@@ -213,8 +187,6 @@ const politicians = [
   },
   {
     name: "Office of Akhilesh Yadav – Samajwadi Party",
-    contactNumber: "0522-2624242",
-    whatsappNumber: "0522-2624242",
     email: "contact@samajwadiparty.in",
     website: "https://samajwadiparty.in/",
     logo: "https://samajwadiparty.in/",
@@ -229,8 +201,6 @@ const politicians = [
   },
   {
     name: "Office of the Chief Minister of Tamil Nadu – M. K. Stalin",
-    contactNumber: "044-25310000",
-    whatsappNumber: "044-25310000",
     email: "cm@tn.gov.in",
     website: "https://www.tn.gov.in/",
     logo: "https://dmk.in/",
@@ -245,8 +215,6 @@ const politicians = [
   },
   {
     name: "Office of Arvind Kejriwal – Aam Aadmi Party",
-    contactNumber: "011-23392020",
-    whatsappNumber: "011-23392020",
     email: "contact@aamaadmiparty.org",
     website: "https://aamaadmiparty.org/",
     logo: "https://aamaadmiparty.org/",
@@ -261,8 +229,6 @@ const politicians = [
   },
   {
     name: "Office of Sharad Pawar – Nationalist Congress Party (Sharadchandra Pawar)",
-    contactNumber: "022-22024444",
-    whatsappNumber: "022-22024444",
     email: "contact@ncpsp.in",
     website: "https://ncpsp.in/",
     logo: "https://ncpsp.in/",
@@ -277,8 +243,6 @@ const politicians = [
   },
   {
     name: "Office of the Chief Minister of Andhra Pradesh – N. Chandrababu Naidu",
-    contactNumber: "0866-2429000",
-    whatsappNumber: "0866-2429000",
     email: "cm@ap.gov.in",
     website: "https://ap.gov.in/",
     logo: "https://www.telugudesam.org/",
@@ -293,8 +257,6 @@ const politicians = [
   },
   {
     name: "Office of the Chief Minister of Kerala – Pinarayi Vijayan",
-    contactNumber: "0471-2323000",
-    whatsappNumber: "0471-2323000",
     email: "cm@kerala.gov.in",
     website: "https://kerala.gov.in/",
     logo: "https://www.cpimkerala.org/",
@@ -309,8 +271,6 @@ const politicians = [
   },
   {
     name: "Office of Tejashwi Yadav – Rashtriya Janata Dal",
-    contactNumber: "0612-2233000",
-    whatsappNumber: "0612-2233000",
     email: "contact@rjd.co.in",
     website: "https://rjd.co.in/",
     logo: "https://rjd.co.in/",

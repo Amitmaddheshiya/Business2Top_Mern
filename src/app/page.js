@@ -13,12 +13,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   // Crown display: top 10 auto gets crown, admin can also manually set crown on any profile
   const showCrown = business.hasCrown === true || (business.hasCrown === false && isTop10);
 
-  const getWhatsAppLink = (whatsappNumber, businessName) => {
-    const cleanNumber = whatsappNumber.replace(/\D/g, '');
-    const message = encodeURIComponent(`Hello! I found ${businessName} on TrustMark and would like to inquire about your services.`);
-    return `https://wa.me/${cleanNumber}?text=${message}`;
-  };
-
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full">
       {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
@@ -100,10 +94,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
         <div className="space-y-2">
           <p className="text-xs font-semibold text-charcoal uppercase tracking-wide">Contact</p>
           <div className="space-y-1.5 text-xs sm:text-sm">
-            <p className="flex items-center gap-2 text-softgray">
-              <span className="w-12 sm:w-16 font-medium text-charcoal">Phone:</span>
-              <span className="font-medium text-charcoal">{business.contactNumber}</span>
-            </p>
             {business.email && (
               <p className="flex items-center gap-2 text-softgray">
                 <span className="w-12 sm:w-16 font-medium text-charcoal">Email:</span>
@@ -153,17 +143,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
               <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Visit Website</span>
               <span className="sm:hidden">Website</span>
-            </a>
-          )}
-          {business.whatsappNumber && (
-            <a
-              href={`https://wa.me/${business.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-medium text-xs sm:text-sm"
-            >
-              <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-              WhatsApp
             </a>
           )}
           <button

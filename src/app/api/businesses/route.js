@@ -79,8 +79,6 @@ export async function POST(request) {
 
     const business = await Business.create({
       name: body.name,
-      contactNumber: body.contactNumber,
-      whatsappNumber: body.whatsappNumber,
       address: body.address,
       email: body.email || '',
       website: body.website || '',

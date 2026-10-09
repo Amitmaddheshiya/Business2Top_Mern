@@ -5,14 +5,6 @@ const BusinessSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contactNumber: {
-    type: String,
-    required: true,
-  },
-  whatsappNumber: {
-    type: String,
-    required: true,
-  },
   address: {
     type: String,
     required: true,
