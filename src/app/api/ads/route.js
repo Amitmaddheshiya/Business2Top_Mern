@@ -22,12 +22,14 @@ export async function POST(request) {
     await dbConnect();
 
     const body = await request.json();
-    const { brandName, imageUrl, linkUrl } = body;
+    const { brandName, imageUrl, linkUrl, offerText, subtitle } = body;
 
     const ad = await Ad.create({
       brandName,
       imageUrl,
       linkUrl,
+      offerText: offerText || '',
+      subtitle: subtitle || '',
       isActive: true,
     });
 
