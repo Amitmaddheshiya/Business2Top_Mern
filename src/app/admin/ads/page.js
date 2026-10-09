@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Edit } from 'lucide-react';
 import { isAuthenticated } from '@/lib/auth';
 
 export default function ManageAds() {
@@ -10,6 +10,7 @@ export default function ManageAds() {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingAd, setEditingAd] = useState(null);
   const [newAd, setNewAd] = useState({
     brandName: '',
     imageUrl: '',
@@ -46,17 +47,21 @@ export default function ManageAds() {
     setError('');
 
     try {
-      const response = await fetch('/api/ads', {
-        method: 'POST',
+      const url = editingAd ? `/api/ads/${editingAd._id}` : '/api/ads';
+      const method = editingAd ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newAd),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create ad');
+        throw new Error(editingAd ? 'Failed to update ad' : 'Failed to create ad');
       }
 
       setNewAd({ brandName: '', imageUrl: '', linkUrl: '', offerText: '', subtitle: '' });
+      setEditingAd(null);
       setShowForm(false);
       fetchAds();
     } catch (err) {
@@ -64,6 +69,18 @@ export default function ManageAds() {
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleEdit = (ad) => {
+    setEditingAd(ad);
+    setNewAd({
+      brandName: ad.brandName,
+      imageUrl: ad.imageUrl,
+      linkUrl: ad.linkUrl,
+      offerText: ad.offerText || '',
+      subtitle: ad.subtitle || '',
+    });
+    setShowForm(true);
   };
 
   const handleDelete = async (adId) => {
@@ -126,7 +143,7 @@ export default function ManageAds() {
         {/* Add Ad Form */}
         {showForm && (
           <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury p-6 mb-8">
-            <h2 className="text-xl font-bold text-charcoal mb-6">Add New Brand Ad</h2>
+            <h2 className="text-xl font-bold text-charcoal mb-6">{editingAd ? 'Edit Brand Ad' : 'Add New Brand Ad'}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-charcoal mb-2">Brand Name</label>
@@ -231,8 +248,14 @@ export default function ManageAds() {
                     {ad.isActive ? 'Active' : 'Inactive'}
                   </span>
                   <button
+                    onClick={() => handleEdit(ad)}
+                    className="ml-auto p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  >
+                    <Edit className="w-4 h-4" />
+                  </button>
+                  <button
                     onClick={() => handleDelete(ad._id)}
-                    className="ml-auto p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>

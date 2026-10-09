@@ -52,12 +52,12 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="hidden md:flex flex-1 justify-center px-4"
             >
-              {activeAd.offerText ? (
+              {activeAd.offerText && activeAd.offerText.trim() !== '' ? (
                 <div className="text-center">
                   <p className="text-lg font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse">
                     {activeAd.offerText}
                   </p>
-                  {activeAd.subtitle && (
+                  {activeAd.subtitle && activeAd.subtitle.trim() !== '' && (
                     <p className="text-xs text-softgray animate-bounce">{activeAd.subtitle}</p>
                   )}
                 </div>
@@ -79,12 +79,12 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="md:hidden flex-1 mx-2"
             >
-              {activeAd.offerText ? (
+              {activeAd.offerText && activeAd.offerText.trim() !== '' ? (
                 <div className="text-center">
                   <p className="text-sm font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse truncate">
                     {activeAd.offerText}
                   </p>
-                  {activeAd.subtitle && (
+                  {activeAd.subtitle && activeAd.subtitle.trim() !== '' && (
                     <p className="text-xs text-softgray animate-bounce truncate">{activeAd.subtitle}</p>
                   )}
                 </div>
