@@ -23,22 +23,24 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   let cardTheme = 'bg-white rounded-2xl border border-gold-200 shadow-luxury';
   let headerTheme = 'bg-gradient-to-r from-gold-50 to-ivory-50 border-b border-gold-100';
   let footerTheme = 'bg-gold-50 border-t border-gold-100';
+  let animatedBorder = false;
 
   if (hasAllBadges) {
-    // Ultra luxury theme for #1 + crown + elite
-    cardTheme = 'bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 rounded-2xl border-2 border-amber-400 shadow-2xl shadow-amber-500/30';
-    headerTheme = 'bg-gradient-to-r from-amber-100 via-yellow-100 to-amber-50 border-b-2 border-amber-400';
-    footerTheme = 'bg-gradient-to-r from-amber-100 to-yellow-100 border-t-2 border-amber-400';
+    // Ultra luxury theme for #1 + crown + elite - diamond/blue dark with animated border
+    cardTheme = 'bg-gradient-to-br from-blue-900 via-slate-900 to-blue-950 rounded-2xl border-2 border-transparent shadow-2xl shadow-blue-500/40';
+    headerTheme = 'bg-gradient-to-r from-blue-800 via-slate-800 to-blue-900 border-b-2 border-blue-400';
+    footerTheme = 'bg-gradient-to-r from-blue-800 to-slate-900 border-t-2 border-blue-400';
+    animatedBorder = true;
   } else if (hasRankAndCrown) {
-    // Professional premium theme for #1 + crown
-    cardTheme = 'bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl border-2 border-slate-400 shadow-xl shadow-slate-500/20';
-    headerTheme = 'bg-gradient-to-r from-slate-100 to-gray-200 border-b-2 border-slate-400';
-    footerTheme = 'bg-gradient-to-r from-slate-100 to-gray-200 border-t-2 border-slate-400';
+    // Professional premium theme for #1 + crown - gold
+    cardTheme = 'bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl border-2 border-yellow-500 shadow-xl shadow-yellow-500/30';
+    headerTheme = 'bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-50 border-b-2 border-yellow-500';
+    footerTheme = 'bg-gradient-to-r from-yellow-100 to-amber-100 border-t-2 border-yellow-500';
   } else if (hasRankOnly) {
-    // Premium theme for #1 only
-    cardTheme = 'bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border-2 border-purple-300 shadow-lg shadow-purple-500/20';
-    headerTheme = 'bg-gradient-to-r from-purple-100 to-indigo-100 border-b-2 border-purple-300';
-    footerTheme = 'bg-gradient-to-r from-purple-100 to-indigo-100 border-t-2 border-purple-300';
+    // Premium theme for #1 only - silver
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 border-gray-400 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2 border-gray-400';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2 border-gray-400';
   }
 
   return (
@@ -427,10 +429,6 @@ export default function Home() {
               <div className="space-y-3">
                 <p className="text-xs font-semibold text-charcoal uppercase tracking-wide">Contact Information</p>
                 <div className="space-y-2 text-sm">
-                  <p className="flex items-center gap-2">
-                    <span className="font-medium text-charcoal w-20">Phone:</span>
-                    <span className="text-charcoal">{selectedBusiness.contactNumber}</span>
-                  </p>
                   {selectedBusiness.email && (
                     <p className="flex items-center gap-2">
                       <span className="font-medium text-charcoal w-20">Email:</span>
@@ -462,17 +460,6 @@ export default function Home() {
                   >
                     <Globe className="w-4 h-4" />
                     Visit Website
-                  </a>
-                )}
-                {selectedBusiness.whatsappNumber && (
-                  <a
-                    href={`https://wa.me/${selectedBusiness.whatsappNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-medium"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    WhatsApp
                   </a>
                 )}
               </div>

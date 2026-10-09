@@ -16,7 +16,7 @@ export default function Navbar() {
     if (ads.length > 1) {
       const interval = setInterval(() => {
         setCurrentAdIndex((prev) => (prev + 1) % ads.length);
-      }, 10000); // Rotate every 10 seconds
+      }, 5000); // Rotate every 5 seconds
       return () => clearInterval(interval);
     }
   }, [ads]);
