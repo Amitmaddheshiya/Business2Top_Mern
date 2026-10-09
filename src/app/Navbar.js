@@ -5,23 +5,35 @@ import Link from 'next/link';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeAd, setActiveAd] = useState(null);
+  const [ads, setAds] = useState([]);
+  const [currentAdIndex, setCurrentAdIndex] = useState(0);
 
   useEffect(() => {
     fetchAds();
   }, []);
 
+  useEffect(() => {
+    if (ads.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentAdIndex((prev) => (prev + 1) % ads.length);
+      }, 10000); // Rotate every 10 seconds
+      return () => clearInterval(interval);
+    }
+  }, [ads]);
+
   const fetchAds = async () => {
     try {
       const response = await fetch('/api/ads');
-      const ads = await response.json();
-      if (ads && ads.length > 0) {
-        setActiveAd(ads[0]); // Show first active ad
+      const adsData = await response.json();
+      if (adsData && adsData.length > 0) {
+        setAds(adsData);
       }
     } catch (error) {
       console.error('Error fetching ads:', error);
     }
   };
+
+  const activeAd = ads[currentAdIndex];
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gold-200 shadow-luxury">

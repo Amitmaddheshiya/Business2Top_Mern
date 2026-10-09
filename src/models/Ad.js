@@ -21,10 +21,6 @@ const AdSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  videoUrl: {
-    type: String,
-    default: '',
-  },
   isActive: {
     type: Boolean,
     default: true,

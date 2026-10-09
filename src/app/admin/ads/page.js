@@ -16,7 +16,6 @@ export default function ManageAds() {
     linkUrl: '',
     offerText: '',
     subtitle: '',
-    videoUrl: '',
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -57,7 +56,7 @@ export default function ManageAds() {
         throw new Error('Failed to create ad');
       }
 
-      setNewAd({ brandName: '', imageUrl: '', linkUrl: '', offerText: '', subtitle: '', videoUrl: '' });
+      setNewAd({ brandName: '', imageUrl: '', linkUrl: '', offerText: '', subtitle: '' });
       setShowForm(false);
       fetchAds();
     } catch (err) {
@@ -184,17 +183,6 @@ export default function ManageAds() {
                 />
                 <p className="text-xs text-softgray mt-1">Smaller animated text below offer text</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-charcoal mb-2">Video URL (Optional)</label>
-                <input
-                  type="url"
-                  value={newAd.videoUrl}
-                  onChange={(e) => setNewAd({ ...newAd, videoUrl: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
-                  placeholder="e.g., https://youtube.com/watch?v=xxx"
-                />
-                <p className="text-xs text-softgray mt-1">YouTube or video link (will be shown if image is not provided)</p>
-              </div>
               <div className="flex gap-4 pt-4">
                 <button
                   type="submit"
@@ -237,9 +225,6 @@ export default function ManageAds() {
                   className="w-full h-32 object-contain rounded-lg border border-gold-200 mb-4"
                   onError={(e) => e.target.src = '/placeholder.png'}
                 />
-                {ad.videoUrl && (
-                  <p className="text-xs text-softgray mb-2 truncate">📹 {ad.videoUrl}</p>
-                )}
                 <p className="text-xs text-softgray mb-2 truncate">{ad.linkUrl}</p>
                 <div className="flex items-center gap-2">
                   <span className={`px-2 py-1 rounded-lg text-xs font-medium ${ad.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
