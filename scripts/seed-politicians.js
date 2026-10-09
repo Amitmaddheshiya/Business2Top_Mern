@@ -6,9 +6,10 @@ const politicians = [
   {
     name: "Office of the Prime Minister of India – Narendra Modi",
     contactNumber: "011-23012312",
+    whatsappNumber: "011-23012312",
     email: "pmosb@pmo.nic.in",
-    website: "https://en.wikipedia.org/wiki/Narendra_Modi",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Narendra+Modi&title=Special:MediaSearch&type=image",
+    website: "https://www.pmindia.gov.in/",
+    logo: "https://www.pmindia.gov.in/",
     address: "Prime Minister's Office, Seva Teerth, New Delhi, India",
     description: "Narendra Modi is the Prime Minister of India and a senior leader of the Bharatiya Janata Party (BJP).",
     productsAndServices: ["National governance", "public administration", "government policy", "citizen services", "national development"],
@@ -16,15 +17,15 @@ const politicians = [
     totalVotes: 1250,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 1
+    hasCrown: true
   },
   {
     name: "Office of Amit Shah – Ministry of Home Affairs",
     contactNumber: "011-23092015",
+    whatsappNumber: "011-23092015",
     email: "contact@mha.gov.in",
-    website: "https://en.wikipedia.org/wiki/Amit_Shah",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Amit+Shah&title=Special:MediaSearch&type=image",
+    website: "https://www.mha.gov.in/",
+    logo: "https://www.mha.gov.in/",
     address: "Ministry of Home Affairs, North Block, New Delhi, India",
     description: "Amit Shah is a senior BJP leader and Union Minister responsible for Home Affairs and Cooperation.",
     productsAndServices: ["Internal security", "public administration", "national security policy", "cooperative sector development", "government services"],
@@ -32,15 +33,15 @@ const politicians = [
     totalVotes: 980,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 2
+    hasCrown: true
   },
   {
     name: "Office of Dr. S. Jaishankar – Ministry of External Affairs",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@mea.gov.in",
-    website: "https://en.wikipedia.org/wiki/S._Jaishankar",
-    logo: "https://commons.wikimedia.org/w/index.php?search=S.+Jaishankar&title=Special:MediaSearch&type=image",
+    website: "https://www.mea.gov.in/",
+    logo: "https://www.mea.gov.in/",
     address: "Ministry of External Affairs, South Block, New Delhi, India",
     description: "S. Jaishankar is India's Union Minister of External Affairs and a senior BJP leader.",
     productsAndServices: ["Foreign affairs", "diplomacy", "international relations", "consular services", "bilateral cooperation"],
@@ -48,15 +49,15 @@ const politicians = [
     totalVotes: 850,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 3
+    hasCrown: true
   },
   {
     name: "Office of the Chief Minister of Uttar Pradesh – Yogi Adityanath",
     contactNumber: "0522-2236001",
+    whatsappNumber: "0522-2236001",
     email: "cm@up.gov.in",
-    website: "https://en.wikipedia.org/wiki/Yogi_Adityanath",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Yogi+Adityanath&title=Special:MediaSearch&type=image",
+    website: "https://upcmo.up.nic.in/",
+    logo: "https://up.gov.in/",
     address: "Chief Minister's Office, Government of Uttar Pradesh, Lucknow, Uttar Pradesh, India",
     description: "Yogi Adityanath is the Chief Minister of Uttar Pradesh and a senior BJP leader.",
     productsAndServices: ["State governance", "public welfare", "infrastructure development", "law and order", "citizen grievance services"],
@@ -64,15 +65,15 @@ const politicians = [
     totalVotes: 1100,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 4
+    hasCrown: true
   },
   {
     name: "Office of Piyush Goyal – Ministry of Commerce and Industry",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@commerce.gov.in",
-    website: "https://en.wikipedia.org/wiki/Piyush_Goyal",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Piyush+Goyal&title=Special:MediaSearch&type=image",
+    website: "https://commerce.gov.in/",
+    logo: "https://commerce.gov.in/",
     address: "Ministry of Commerce and Industry, Udyog Bhawan, New Delhi, India",
     description: "Piyush Goyal is a Union Minister and senior BJP leader associated with commerce, industry and trade policy.",
     productsAndServices: ["Trade policy", "industrial development", "export promotion", "investment facilitation", "international commerce"],
@@ -80,15 +81,15 @@ const politicians = [
     totalVotes: 720,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 5
+    hasCrown: true
   },
   {
     name: "Office of Rajnath Singh – Ministry of Defence",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@mod.gov.in",
-    website: "https://en.wikipedia.org/wiki/Rajnath_Singh",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Rajnath+Singh&title=Special:MediaSearch&type=image",
+    website: "https://mod.gov.in/",
+    logo: "https://mod.gov.in/",
     address: "Ministry of Defence, South Block, New Delhi, India",
     description: "Rajnath Singh is India's Union Minister of Defence and a senior BJP leader.",
     productsAndServices: ["Defence administration", "national defence policy", "military modernisation", "defence procurement", "national security"],
@@ -96,15 +97,15 @@ const politicians = [
     totalVotes: 890,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 6
+    hasCrown: true
   },
   {
     name: "Office of Nirmala Sitharaman – Ministry of Finance",
     contactNumber: "011-23092015",
+    whatsappNumber: "011-23092015",
     email: "contact@finmin.gov.in",
-    website: "https://en.wikipedia.org/wiki/Nirmala_Sitharaman",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Nirmala+Sitharaman&title=Special:MediaSearch&type=image",
+    website: "https://finmin.gov.in/",
+    logo: "https://finmin.gov.in/",
     address: "Ministry of Finance, North Block, New Delhi, India",
     description: "Nirmala Sitharaman is India's Union Minister of Finance and a senior BJP leader.",
     productsAndServices: ["National budget", "taxation policy", "public finance", "economic policy", "corporate affairs administration"],
@@ -112,15 +113,15 @@ const politicians = [
     totalVotes: 950,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 7
+    hasCrown: true
   },
   {
     name: "Office of Nitin Gadkari – Ministry of Road Transport and Highways",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@morth.nic.in",
-    website: "https://en.wikipedia.org/wiki/Nitin_Gadkari",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Nitin+Gadkari&title=Special:MediaSearch&type=image",
+    website: "https://morth.nic.in/",
+    logo: "https://morth.nic.in/",
     address: "Ministry of Road Transport and Highways, Transport Bhawan, New Delhi, India",
     description: "Nitin Gadkari is a senior BJP leader and Union Minister responsible for road transport and highways.",
     productsAndServices: ["Highway development", "road infrastructure", "road safety", "transport policy", "national highway projects"],
@@ -128,15 +129,15 @@ const politicians = [
     totalVotes: 780,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 8
+    hasCrown: true
   },
   {
     name: "Office of J. P. Nadda – Ministry of Health and Family Welfare",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@mohfw.gov.in",
-    website: "https://en.wikipedia.org/wiki/J._P._Nadda",
-    logo: "https://commons.wikimedia.org/w/index.php?search=JP+Nadda&title=Special:MediaSearch&type=image",
+    website: "https://mohfw.gov.in/",
+    logo: "https://mohfw.gov.in/",
     address: "Ministry of Health and Family Welfare, Nirman Bhawan, New Delhi, India",
     description: "J. P. Nadda is a senior BJP leader and Union Minister associated with health and family welfare.",
     productsAndServices: ["Public healthcare policy", "family welfare", "national health programmes", "healthcare administration", "public health services"],
@@ -144,15 +145,15 @@ const politicians = [
     totalVotes: 650,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 9
+    hasCrown: true
   },
   {
     name: "Office of Shivraj Singh Chouhan – Ministry of Agriculture and Farmers Welfare",
     contactNumber: "011-23063500",
+    whatsappNumber: "011-23063500",
     email: "contact@agriwelfare.gov.in",
-    website: "https://en.wikipedia.org/wiki/Shivraj_Singh_Chouhan",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Shivraj+Singh+Chouhan&title=Special:MediaSearch&type=image",
+    website: "https://agriwelfare.gov.in/",
+    logo: "https://agriwelfare.gov.in/",
     address: "Ministry of Agriculture and Farmers Welfare, Krishi Bhawan, New Delhi, India",
     description: "Shivraj Singh Chouhan is a senior BJP leader and Union Minister responsible for agriculture and farmers' welfare.",
     productsAndServices: ["Agricultural policy", "farmer welfare", "crop development", "agricultural support programmes", "rural development"],
@@ -160,15 +161,15 @@ const politicians = [
     totalVotes: 580,
     ratings: [],
     isVerified: true,
-    hasCrown: true,
-    manualRank: 10
+    hasCrown: true
   },
   {
     name: "Office of Rahul Gandhi – Indian National Congress",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
-    website: "https://en.wikipedia.org/wiki/Rahul_Gandhi",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Rahul+Gandhi&title=Special:MediaSearch&type=image",
+    website: "https://inc.in/",
+    logo: "https://inc.in/",
     address: "Indian National Congress Headquarters, Indira Bhawan, New Delhi, India",
     description: "Rahul Gandhi is a senior Indian National Congress leader and Member of Parliament who has served as Leader of the Opposition in the Lok Sabha.",
     productsAndServices: ["Parliamentary representation", "public policy", "constituency services", "political advocacy", "public engagement"],
@@ -176,15 +177,15 @@ const politicians = [
     totalVotes: 1200,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 11
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of West Bengal – Mamata Banerjee",
     contactNumber: "033-22143300",
+    whatsappNumber: "033-22143300",
     email: "cm@wb.gov.in",
-    website: "https://en.wikipedia.org/wiki/Mamata_Banerjee",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Mamata+Banerjee&title=Special:MediaSearch&type=image",
+    website: "https://wb.gov.in/",
+    logo: "https://aitcofficial.org/",
     address: "Chief Minister's Office, Nabanna, Howrah, West Bengal, India",
     description: "Mamata Banerjee is the Chief Minister of West Bengal and the founder and leader of the All India Trinamool Congress.",
     productsAndServices: ["State governance", "public welfare", "social development", "state infrastructure", "citizen grievance services"],
@@ -192,15 +193,15 @@ const politicians = [
     totalVotes: 1050,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 12
+    hasCrown: false
   },
   {
     name: "Office of Mallikarjun Kharge – Indian National Congress",
     contactNumber: "011-23012138",
+    whatsappNumber: "011-23012138",
     email: "contact@inc.in",
-    website: "https://en.wikipedia.org/wiki/Mallikarjun_Kharge",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Mallikarjun+Kharge&title=Special:MediaSearch&type=image",
+    website: "https://inc.in/",
+    logo: "https://inc.in/",
     address: "Indian National Congress Headquarters, Indira Bhawan, New Delhi, India",
     description: "Mallikarjun Kharge is the President of the Indian National Congress and a senior parliamentary leader.",
     productsAndServices: ["Party administration", "parliamentary representation", "political policy", "public engagement", "organisational leadership"],
@@ -208,15 +209,15 @@ const politicians = [
     totalVotes: 920,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 13
+    hasCrown: false
   },
   {
     name: "Office of Akhilesh Yadav – Samajwadi Party",
     contactNumber: "0522-2624242",
+    whatsappNumber: "0522-2624242",
     email: "contact@samajwadiparty.in",
-    website: "https://en.wikipedia.org/wiki/Akhilesh_Yadav",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Akhilesh+Yadav&title=Special:MediaSearch&type=image",
+    website: "https://samajwadiparty.in/",
+    logo: "https://samajwadiparty.in/",
     address: "Samajwadi Party Office, Lucknow, Uttar Pradesh, India",
     description: "Akhilesh Yadav is the National President of the Samajwadi Party and a Member of Parliament.",
     productsAndServices: ["Political organisation", "parliamentary representation", "public policy", "social welfare advocacy", "constituency services"],
@@ -224,15 +225,15 @@ const politicians = [
     totalVotes: 870,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 14
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Tamil Nadu – M. K. Stalin",
     contactNumber: "044-25310000",
+    whatsappNumber: "044-25310000",
     email: "cm@tn.gov.in",
-    website: "https://en.wikipedia.org/wiki/M._K._Stalin",
-    logo: "https://commons.wikimedia.org/w/index.php?search=MK+Stalin&title=Special:MediaSearch&type=image",
+    website: "https://www.tn.gov.in/",
+    logo: "https://dmk.in/",
     address: "Chief Minister's Office, Secretariat, Fort St. George, Chennai, Tamil Nadu, India",
     description: "M. K. Stalin is a senior DMK leader and has served as Chief Minister of Tamil Nadu.",
     productsAndServices: ["State governance", "public welfare", "infrastructure development", "education policy", "industrial development"],
@@ -240,15 +241,15 @@ const politicians = [
     totalVotes: 980,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 15
+    hasCrown: false
   },
   {
     name: "Office of Arvind Kejriwal – Aam Aadmi Party",
     contactNumber: "011-23392020",
+    whatsappNumber: "011-23392020",
     email: "contact@aamaadmiparty.org",
-    website: "https://en.wikipedia.org/wiki/Arvind_Kejriwal",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Arvind+Kejriwal&title=Special:MediaSearch&type=image",
+    website: "https://aamaadmiparty.org/",
+    logo: "https://aamaadmiparty.org/",
     address: "Aam Aadmi Party Headquarters, New Delhi, India",
     description: "Arvind Kejriwal is the National Convenor of the Aam Aadmi Party and a prominent Indian political leader.",
     productsAndServices: ["Party administration", "public policy", "political advocacy", "citizen engagement", "public welfare initiatives"],
@@ -256,15 +257,15 @@ const politicians = [
     totalVotes: 1100,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 16
+    hasCrown: false
   },
   {
     name: "Office of Sharad Pawar – Nationalist Congress Party (Sharadchandra Pawar)",
     contactNumber: "022-22024444",
+    whatsappNumber: "022-22024444",
     email: "contact@ncpsp.in",
-    website: "https://en.wikipedia.org/wiki/Sharad_Pawar",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Sharad+Pawar&title=Special:MediaSearch&type=image",
+    website: "https://ncpsp.in/",
+    logo: "https://ncpsp.in/",
     address: "Party Office, Mumbai, Maharashtra, India",
     description: "Sharad Pawar is a veteran Indian political leader associated with the Nationalist Congress Party (Sharadchandra Pawar).",
     productsAndServices: ["Political leadership", "public policy", "parliamentary representation", "agricultural advocacy", "public engagement"],
@@ -272,15 +273,15 @@ const politicians = [
     totalVotes: 750,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 17
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Andhra Pradesh – N. Chandrababu Naidu",
     contactNumber: "0866-2429000",
+    whatsappNumber: "0866-2429000",
     email: "cm@ap.gov.in",
-    website: "https://en.wikipedia.org/wiki/N._Chandrababu_Naidu",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Chandrababu+Naidu&title=Special:MediaSearch&type=image",
+    website: "https://ap.gov.in/",
+    logo: "https://www.telugudesam.org/",
     address: "Chief Minister's Office, Government of Andhra Pradesh, Amaravati, Andhra Pradesh, India",
     description: "N. Chandrababu Naidu is the Chief Minister of Andhra Pradesh and a senior Telugu Desam Party leader.",
     productsAndServices: ["State governance", "technology-led development", "infrastructure projects", "investment promotion", "public administration"],
@@ -288,15 +289,15 @@ const politicians = [
     totalVotes: 820,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 18
+    hasCrown: false
   },
   {
     name: "Office of the Chief Minister of Kerala – Pinarayi Vijayan",
     contactNumber: "0471-2323000",
+    whatsappNumber: "0471-2323000",
     email: "cm@kerala.gov.in",
-    website: "https://en.wikipedia.org/wiki/Pinarayi_Vijayan",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Pinarayi+Vijayan&title=Special:MediaSearch&type=image",
+    website: "https://kerala.gov.in/",
+    logo: "https://www.cpimkerala.org/",
     address: "Chief Minister's Office, Government Secretariat, Thiruvananthapuram, Kerala, India",
     description: "Pinarayi Vijayan is a senior CPI(M) leader who has served as Chief Minister of Kerala.",
     productsAndServices: ["State governance", "public welfare", "healthcare policy", "education", "infrastructure development"],
@@ -304,15 +305,15 @@ const politicians = [
     totalVotes: 760,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 19
+    hasCrown: false
   },
   {
     name: "Office of Tejashwi Yadav – Rashtriya Janata Dal",
     contactNumber: "0612-2233000",
+    whatsappNumber: "0612-2233000",
     email: "contact@rjd.co.in",
-    website: "https://en.wikipedia.org/wiki/Tejashwi_Yadav",
-    logo: "https://commons.wikimedia.org/w/index.php?search=Tejashwi+Yadav&title=Special:MediaSearch&type=image",
+    website: "https://rjd.co.in/",
+    logo: "https://rjd.co.in/",
     address: "Rashtriya Janata Dal Office, Patna, Bihar, India",
     description: "Tejashwi Yadav is a senior Rashtriya Janata Dal leader and has served as Leader of the Opposition in Bihar.",
     productsAndServices: ["Political organisation", "public policy", "youth engagement", "social welfare advocacy", "constituency services"],
@@ -320,8 +321,7 @@ const politicians = [
     totalVotes: 690,
     ratings: [],
     isVerified: true,
-    hasCrown: false,
-    manualRank: 20
+    hasCrown: false
   }
 ];
 
