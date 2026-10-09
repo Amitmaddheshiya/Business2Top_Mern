@@ -18,33 +18,33 @@ const BusinessCard = memo(({ business, index, onRate }) => {
       {/* Manual Rank Badge - Top Left (dynamic #1, #2, #3...) */}
       {business.manualRank !== null && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
-          <span className="font-bold text-sm">#{business.manualRank}</span>
+          <span className="font-bold text-xs sm:text-sm">#{business.manualRank}</span>
         </div>
       )}
 
       {/* Crown Badge - Top Right attached */}
       {business.hasCrown && (
         <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-bl-lg rounded-tr-xl z-10">
-          <Crown className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+          <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-yellow-400" />
         </div>
       )}
 
       {/* Card Header with Logo and Badges */}
-      <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-6 border-b border-gold-100">
-        <div className="flex items-start gap-4">
+      <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-4 sm:p-6 border-b border-gold-100">
+        <div className="flex items-start gap-3 sm:gap-4">
           {business.logo && (
             <div className="flex-shrink-0">
               <img
                 src={business.logo}
                 alt={business.name}
-                className="w-16 h-16 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
                 onError={(e) => e.target.style.display = 'none'}
               />
             </div>
           )}
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-2">
-              <h3 className="text-xl font-bold text-charcoal font-serif">{business.name}</h3>
+              <h3 className="text-base sm:text-xl font-bold text-charcoal font-serif truncate">{business.name}</h3>
               <div className="flex gap-1 flex-shrink-0">
                 {business.isVerified && (
                   <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
@@ -54,10 +54,10 @@ const BusinessCard = memo(({ business, index, onRate }) => {
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
-                <Star className="w-4 h-4 text-gold-500 fill-gold-500" />
-                <span className="font-bold text-gold-600">{business.averageRating.toFixed(1)}</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-1 bg-white px-2 sm:px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-gold-500 fill-gold-500" />
+                <span className="font-bold text-gold-600 text-sm sm:text-base">{business.averageRating.toFixed(1)}</span>
                 <span className="text-xs text-softgray">({business.totalVotes})</span>
               </div>
             </div>
@@ -66,10 +66,10 @@ const BusinessCard = memo(({ business, index, onRate }) => {
       </div>
 
       {/* Card Body */}
-      <div className="p-6 space-y-4">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
         {/* Description */}
         {business.description && (
-          <p className="text-softgray text-sm leading-relaxed line-clamp-2">{business.description}</p>
+          <p className="text-softgray text-xs sm:text-sm leading-relaxed line-clamp-2">{business.description}</p>
         )}
 
         {/* Products & Services */}
@@ -80,7 +80,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
               {business.productsAndServices.slice(0, 4).map((tag, idx) => (
                 <span
                   key={idx}
-                  className="text-xs bg-gold-50 text-gold-700 px-3 py-1.5 rounded-lg border border-gold-200 font-medium"
+                  className="text-xs bg-gold-50 text-gold-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-gold-200 font-medium"
                 >
                   {tag}
                 </span>
@@ -95,26 +95,26 @@ const BusinessCard = memo(({ business, index, onRate }) => {
         {/* Contact Information */}
         <div className="space-y-2">
           <p className="text-xs font-semibold text-charcoal uppercase tracking-wide">Contact</p>
-          <div className="space-y-1.5 text-sm">
+          <div className="space-y-1.5 text-xs sm:text-sm">
             <p className="flex items-center gap-2 text-softgray">
-              <span className="w-16 font-medium text-charcoal">Phone:</span>
+              <span className="w-12 sm:w-16 font-medium text-charcoal">Phone:</span>
               <span className="font-medium text-charcoal">{business.contactNumber}</span>
             </p>
             {business.email && (
               <p className="flex items-center gap-2 text-softgray">
-                <span className="w-16 font-medium text-charcoal">Email:</span>
+                <span className="w-12 sm:w-16 font-medium text-charcoal">Email:</span>
                 <span className="text-charcoal">{business.email}</span>
               </p>
             )}
             <p className="flex items-start gap-2 text-softgray">
-              <span className="w-16 font-medium text-charcoal mt-0.5">Address:</span>
+              <span className="w-12 sm:w-16 font-medium text-charcoal mt-0.5">Address:</span>
               <span className="text-charcoal">{business.address}</span>
             </p>
           </div>
         </div>
 
         {/* Rating Section */}
-        <div className="pt-4 border-t border-gold-100">
+        <div className="pt-3 sm:pt-4 border-t border-gold-100">
           <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Rate this business</p>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -124,7 +124,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
                 className="hover:scale-110 transition-transform"
               >
                 <Star
-                  className={`w-6 h-6 ${
+                  className={`w-4 h-4 sm:w-6 sm:h-6 ${
                     business.isRated
                       ? 'text-gold-500 fill-gold-500'
                       : 'text-gray-300'
@@ -137,17 +137,18 @@ const BusinessCard = memo(({ business, index, onRate }) => {
       </div>
 
       {/* Card Footer */}
-      <div className="px-6 py-4 bg-gold-50 border-t border-gold-100">
+      <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gold-50 border-t border-gold-100">
         <div className="flex gap-2">
           {business.website && (
             <a
               href={business.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-charcoal text-white rounded-xl hover:bg-gold-600 transition-all duration-200 font-medium text-sm"
+              className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-charcoal text-white rounded-xl hover:bg-gold-600 transition-all duration-200 font-medium text-xs sm:text-sm"
             >
-              <Globe className="w-4 h-4" />
-              Visit Website
+              <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Visit Website</span>
+              <span className="sm:hidden">Website</span>
             </a>
           )}
           {business.whatsappNumber && (
@@ -155,9 +156,9 @@ const BusinessCard = memo(({ business, index, onRate }) => {
               href={`https://wa.me/${business.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-medium text-sm"
+              className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-medium text-xs sm:text-sm"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
               WhatsApp
             </a>
           )}
@@ -256,33 +257,33 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-charcoal font-serif">TrustMark</h1>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-charcoal font-serif text-center sm:text-left">TrustMark</h1>
           <Link
             href="/owner-login"
-            className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
+            className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium text-sm sm:text-base w-full sm:w-auto text-center"
           >
             Business Owner Login
           </Link>
         </div>
 
         {/* Search & Filter Section */}
-        <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-gold-200 shadow-luxury p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <div className="relative flex-1 w-full">
+        <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-gold-200 shadow-luxury p-4 sm:p-6 mb-6 sm:mb-8">
+          <div className="flex flex-col gap-4">
+            <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gold-500 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Search businesses or services..."
+                placeholder="Search businesses..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white"
+                className="w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all bg-white text-sm sm:text-base"
               />
             </div>
-            <div className="flex gap-2 w-full md:w-auto">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSortFilter('highest')}
-                className={`px-4 py-3 rounded-xl border transition-all ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl border transition-all text-xs sm:text-sm flex-1 sm:flex-none ${
                   sortFilter === 'highest'
                     ? 'bg-gold-500 text-white border-gold-500'
                     : 'bg-white border-gold-200 text-charcoal hover:border-gold-500'
@@ -292,7 +293,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setSortFilter('trending')}
-                className={`px-4 py-3 rounded-xl border transition-all ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl border transition-all text-xs sm:text-sm flex-1 sm:flex-none ${
                   sortFilter === 'trending'
                     ? 'bg-gold-500 text-white border-gold-500'
                     : 'bg-white border-gold-200 text-charcoal hover:border-gold-500'
@@ -302,13 +303,13 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setSortFilter('recent')}
-                className={`px-4 py-3 rounded-xl border transition-all ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl border transition-all text-xs sm:text-sm flex-1 sm:flex-none ${
                   sortFilter === 'recent'
                     ? 'bg-gold-500 text-white border-gold-500'
                     : 'bg-white border-gold-200 text-charcoal hover:border-gold-500'
                 }`}
               >
-                Recently Joined
+                Recent
               </button>
               {sortFilter && (
                 <button
@@ -333,7 +334,7 @@ export default function Home() {
             <p className="text-softgray text-lg">No businesses found</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {businesses.map((business, index) => (
               <BusinessCard
                 key={business._id}
