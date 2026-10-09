@@ -9,6 +9,7 @@ export default function Admin() {
   const router = useRouter();
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -88,6 +89,11 @@ export default function Admin() {
     router.push('/');
   };
 
+  const filteredBusinesses = businesses.filter((business) =>
+    business.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (business.uniqueId && business.uniqueId.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   if (loading) {
     return (
       <div className="min-h-screen bg-ivory-50 flex items-center justify-center">
@@ -105,7 +111,14 @@ export default function Admin() {
               <h1 className="text-3xl font-bold text-charcoal mb-2 font-serif">Admin Dashboard</h1>
               <p className="text-softgray">Manage all business listings</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
+              <input
+                type="text"
+                placeholder="Search by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="px-4 py-2 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition-all w-64"
+              />
               <button
                 onClick={() => router.push('/admin/ads')}
                 className="flex items-center gap-2 px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors"
@@ -122,8 +135,10 @@ export default function Admin() {
             </div>
           </div>
 
-          {businesses.length === 0 ? (
-            <p className="text-center text-softgray py-12">No businesses registered yet</p>
+          {filteredBusinesses.length === 0 ? (
+            <p className="text-center text-softgray py-12">
+              {searchTerm ? 'No businesses found matching your search' : 'No businesses registered yet'}
+            </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -139,17 +154,14 @@ export default function Admin() {
                   </tr>
                 </thead>
                 <tbody>
-                  {businesses.map((business) => (
+                  {filteredBusinesses.map((business) => (
                     <tr
                       key={business._id}
                       className="border-b border-gold-100 hover:bg-ivory-50 cursor-pointer"
                       onClick={() => router.push(`/admin/business/${business._id}/edit`)}
                     >
                       <td className="py-4 px-4">
-                        <div>
-                          <p className="font-medium text-charcoal">{business.name}</p>
-                          <p className="text-sm text-softgray">{business.contactNumber}</p>
-                        </div>
+                        <p className="font-medium text-charcoal">{business.name}</p>
                       </td>
                       <td className="py-4 px-4 text-sm text-softgray">{business.email || '-'}</td>
                       <td className="py-4 px-4">

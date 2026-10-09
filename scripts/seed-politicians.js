@@ -4,6 +4,7 @@ const Business = require('../src/models/Business');
 
 const politicians = [
   {
+    uniqueId: "MODI01",
     name: "Office of the Prime Minister of India – Narendra Modi",
     email: "pmosb@pmo.nic.in",
     website: "https://www.pmindia.gov.in/",
@@ -18,6 +19,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "SHAH02",
     name: "Office of Amit Shah – Ministry of Home Affairs",
     email: "contact@mha.gov.in",
     website: "https://www.mha.gov.in/",
@@ -32,6 +34,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "JAI03",
     name: "Office of Dr. S. Jaishankar – Ministry of External Affairs",
     email: "contact@mea.gov.in",
     website: "https://www.mea.gov.in/",
@@ -46,6 +49,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "YOGI04",
     name: "Office of the Chief Minister of Uttar Pradesh – Yogi Adityanath",
     email: "cm@up.gov.in",
     website: "https://upcmo.up.nic.in/",
@@ -60,6 +64,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "GOY05",
     name: "Office of Piyush Goyal – Ministry of Commerce and Industry",
     email: "contact@commerce.gov.in",
     website: "https://commerce.gov.in/",
@@ -74,6 +79,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "RAJ06",
     name: "Office of Rajnath Singh – Ministry of Defence",
     email: "contact@mod.gov.in",
     website: "https://mod.gov.in/",
@@ -88,6 +94,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "SIT07",
     name: "Office of Nirmala Sitharaman – Ministry of Finance",
     email: "contact@finmin.gov.in",
     website: "https://finmin.gov.in/",
@@ -102,6 +109,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "GAD08",
     name: "Office of Nitin Gadkari – Ministry of Road Transport and Highways",
     email: "contact@morth.nic.in",
     website: "https://morth.nic.in/",
@@ -116,6 +124,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "NAD09",
     name: "Office of J. P. Nadda – Ministry of Health and Family Welfare",
     email: "contact@mohfw.gov.in",
     website: "https://mohfw.gov.in/",
@@ -130,6 +139,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "CH10",
     name: "Office of Shivraj Singh Chouhan – Ministry of Agriculture and Farmers Welfare",
     email: "contact@agriwelfare.gov.in",
     website: "https://agriwelfare.gov.in/",
@@ -144,6 +154,7 @@ const politicians = [
     hasCrown: true
   },
   {
+    uniqueId: "RAH11",
     name: "Office of Rahul Gandhi – Indian National Congress",
     email: "contact@inc.in",
     website: "https://inc.in/",
@@ -158,6 +169,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "MAM12",
     name: "Office of the Chief Minister of West Bengal – Mamata Banerjee",
     email: "cm@wb.gov.in",
     website: "https://wb.gov.in/",
@@ -172,6 +184,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "KHA13",
     name: "Office of Mallikarjun Kharge – Indian National Congress",
     email: "contact@inc.in",
     website: "https://inc.in/",
@@ -186,6 +199,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "AKH14",
     name: "Office of Akhilesh Yadav – Samajwadi Party",
     email: "contact@samajwadiparty.in",
     website: "https://samajwadiparty.in/",
@@ -200,6 +214,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "STO15",
     name: "Office of the Chief Minister of Tamil Nadu – M. K. Stalin",
     email: "cm@tn.gov.in",
     website: "https://www.tn.gov.in/",
@@ -214,6 +229,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "KEJ16",
     name: "Office of Arvind Kejriwal – Aam Aadmi Party",
     email: "contact@aamaadmiparty.org",
     website: "https://aamaadmiparty.org/",
@@ -228,6 +244,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "SHA17",
     name: "Office of Sharad Pawar – Nationalist Congress Party (Sharadchandra Pawar)",
     email: "contact@ncpsp.in",
     website: "https://ncpsp.in/",
@@ -242,6 +259,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "CHA18",
     name: "Office of the Chief Minister of Andhra Pradesh – N. Chandrababu Naidu",
     email: "cm@ap.gov.in",
     website: "https://ap.gov.in/",
@@ -256,6 +274,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "PIN19",
     name: "Office of the Chief Minister of Kerala – Pinarayi Vijayan",
     email: "cm@kerala.gov.in",
     website: "https://kerala.gov.in/",
@@ -270,6 +289,7 @@ const politicians = [
     hasCrown: false
   },
   {
+    uniqueId: "TEJ20",
     name: "Office of Tejashwi Yadav – Rashtriya Janata Dal",
     email: "contact@rjd.co.in",
     website: "https://rjd.co.in/",

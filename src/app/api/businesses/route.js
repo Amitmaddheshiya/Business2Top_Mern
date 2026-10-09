@@ -13,7 +13,10 @@ export async function GET(request) {
 
     if (search) {
       const searchRegex = new RegExp(search, 'i');
-      query.name = searchRegex;
+      query.$or = [
+        { name: searchRegex },
+        { uniqueId: searchRegex }
+      ];
     }
 
     // Use MongoDB sort for better performance
@@ -77,7 +80,28 @@ export async function POST(request) {
       return Response.json({ error: 'You can only create one business per account' }, { status: 400 });
     }
 
+    // Generate unique ID (6-character alphanumeric)
+    const generateUniqueId = () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let uniqueId = '';
+      for (let i = 0; i < 6; i++) {
+        uniqueId += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return uniqueId;
+    };
+
+    let uniqueId;
+    let isUnique = false;
+    while (!isUnique) {
+      uniqueId = generateUniqueId();
+      const existing = await Business.findOne({ uniqueId });
+      if (!existing) {
+        isUnique = true;
+      }
+    }
+
     const business = await Business.create({
+      uniqueId,
       name: body.name,
       address: body.address,
       email: body.email || '',

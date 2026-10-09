@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const BusinessSchema = new mongoose.Schema({
+  uniqueId: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

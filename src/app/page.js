@@ -52,6 +52,9 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
                 </div>
               )}
             </div>
+            {business.uniqueId && (
+              <p className="text-xs text-softgray mb-2">ID: {business.uniqueId}</p>
+            )}
             <div className="flex items-center justify-center gap-2 sm:gap-3">
               <div className="flex items-center gap-1 bg-white px-2 sm:px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
                 <Star className="w-3 h-3 sm:w-4 sm:h-4 text-gold-500 fill-gold-500" />
