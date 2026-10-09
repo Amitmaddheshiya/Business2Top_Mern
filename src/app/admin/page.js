@@ -105,13 +105,21 @@ export default function Admin() {
               <h1 className="text-3xl font-bold text-charcoal mb-2 font-serif">Admin Dashboard</h1>
               <p className="text-softgray">Manage all business listings</p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 border border-gold-200 text-charcoal rounded-xl hover:border-gold-500 hover:bg-gold-50 transition-colors"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => router.push('/admin/ads')}
+                className="flex items-center gap-2 px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors"
+              >
+                Manage Ads
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 border border-gold-200 text-charcoal rounded-xl hover:border-gold-500 hover:bg-gold-50 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
           </div>
 
           {businesses.length === 0 ? (
