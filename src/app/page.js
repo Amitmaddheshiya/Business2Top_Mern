@@ -15,24 +15,24 @@ const BusinessCard = memo(({ business, index, onRate }) => {
 
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
-      {/* #1 Badge - Top Left */}
-      {business.manualRank === 1 && (
+      {/* Manual Rank Badge - Top Left (dynamic #1, #2, #3...) */}
+      {business.manualRank !== null && (
         <div className="absolute top-0 left-0 bg-black text-white px-3 py-1.5 rounded-br-xl rounded-tl-2xl z-10">
-          <span className="font-bold text-lg">#1</span>
+          <span className="font-bold text-lg">#{business.manualRank}</span>
         </div>
       )}
 
-      {/* Crown Badge - Top Right (no background) */}
+      {/* Crown Badge - Top Right attached */}
       {business.hasCrown && (
-        <div className="absolute top-2 right-2 z-10">
-          <Crown className="w-8 h-8 text-yellow-500 fill-yellow-500 drop-shadow-lg" />
+        <div className="absolute top-0 right-0 bg-black text-white px-3 py-1.5 rounded-bl-xl rounded-tr-2xl z-10">
+          <Crown className="w-5 h-5 text-yellow-400 fill-yellow-400" />
         </div>
       )}
 
-      {/* Elite Badge with Tick - Top Right (below crown) */}
+      {/* Elite Badge with Tick - Top Right (below crown if exists, or top right if no crown) */}
       {business.isVerified && (
-        <div className="absolute top-12 right-2 z-10">
-          <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
+        <div className={`absolute z-10 ${business.hasCrown ? 'top-10 right-0' : 'top-0 right-0'}`}>
+          <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-bl-xl rounded-tr-xl shadow-md shadow-blue-500/20">
             <Check className="w-3 h-3 text-white fill-white" />
             <span className="text-xs font-semibold text-white">Elite</span>
           </div>
@@ -55,19 +55,6 @@ const BusinessCard = memo(({ business, index, onRate }) => {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-2">
               <h3 className="text-xl font-bold text-charcoal font-serif">{business.name}</h3>
-              <div className="flex gap-1 flex-shrink-0">
-                {business.isVerified && (
-                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
-                    <CheckCircle className="w-3 h-3 text-white" />
-                    <span className="text-xs font-semibold text-white">Elite</span>
-                  </div>
-                )}
-                {business.manualRank !== null && business.manualRank !== 1 && (
-                  <span className="bg-gradient-to-r from-gold-500 to-gold-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md shadow-gold-500/20">
-                    #{business.manualRank}
-                  </span>
-                )}
-              </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
