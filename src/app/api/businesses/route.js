@@ -18,7 +18,7 @@ export async function GET(request) {
 
     // Use MongoDB sort for better performance
     let sortOptions = {};
-    
+
     if (sort === 'highest') {
       sortOptions = { averageRating: -1, createdAt: -1 };
     } else if (sort === 'recent') {
@@ -26,19 +26,20 @@ export async function GET(request) {
     } else if (sort === 'trending') {
       sortOptions = { totalVotes: -1, createdAt: -1 };
     } else {
-      // Default sort: manualRank (nulls last), then averageRating, then createdAt
-      sortOptions = { manualRank: 1, averageRating: -1, createdAt: -1 };
+      // Default sort: manualRank (nulls last), then by rating/votes for auto ranking
+      // Sort by: averageRating (desc), totalVotes (desc), createdAt (desc)
+      sortOptions = { averageRating: -1, totalVotes: -1, createdAt: -1 };
     }
 
     const businesses = await Business.find(query).sort(sortOptions).lean();
 
-    // Calculate automatic rank based on rating
+    // Calculate automatic rank based on rating/votes
     const businessesWithRank = businesses.map((business, index) => {
       // If admin has set manualRank, use it
       if (business.manualRank !== null) {
         return { ...business, autoRank: business.manualRank };
       }
-      // Otherwise, calculate automatic rank (1-based index)
+      // Otherwise, calculate automatic rank based on rating/votes (1-based index)
       return { ...business, autoRank: index + 1 };
     });
 

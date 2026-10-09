@@ -7,12 +7,14 @@ import Link from 'next/link';
 const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   // Calculate display rank: use manualRank if set by admin, otherwise use autoRank
   const effectiveRank = business.manualRank || business.autoRank;
-  const displayRank = effectiveRank;
+  const displayRank = Math.ceil(effectiveRank / 10);
   const isTop10 = effectiveRank <= 10;
 
   // Crown display: top 10 auto gets crown, admin can also manually set crown on any profile
-  // If admin has explicitly set hasCrown to true, show crown. Otherwise, show crown if top 10.
-  const showCrown = business.hasCrown === true || (business.hasCrown === undefined && isTop10);
+  const showCrown = business.hasCrown === true || (business.hasCrown === false && isTop10);
+
+  // Elite badge: only if admin has explicitly set isElite to true
+  const showElite = business.isElite === true;
 
   const getWhatsAppLink = (whatsappNumber, businessName) => {
     const cleanNumber = whatsappNumber.replace(/\D/g, '');
@@ -22,17 +24,24 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
 
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full">
-      {/* Rank Badge - Top Left (actual rank: #1, #2, #3, etc.) */}
+      {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
       {business.autoRank && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
           <span className="font-bold text-xs sm:text-sm">#{displayRank}</span>
         </div>
       )}
 
-      {/* Crown Badge - Top Right attached (admin setting overrides automatic logic) */}
+      {/* Crown Badge - Top Right (top 10 auto + admin override) */}
       {showCrown && (
         <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-bl-lg rounded-tr-xl z-10">
           <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-yellow-400" />
+        </div>
+      )}
+
+      {/* Elite Badge - Bottom Right (admin only) */}
+      {showElite && (
+        <div className="absolute bottom-0 right-0 bg-gradient-to-r from-purple-600 to-purple-800 text-white px-2 py-1 rounded-tl-lg rounded-br-xl z-10">
+          <span className="font-bold text-xs sm:text-sm">ELITE</span>
         </div>
       )}
 
