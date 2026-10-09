@@ -13,8 +13,36 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   // Crown display: top 10 auto gets crown, admin can also manually set crown on any profile
   const showCrown = business.hasCrown === true || (business.hasCrown === false && isTop10);
 
+  // Determine card theme based on badge combinations
+  const isRank1 = displayRank === 1;
+  const isElite = business.isVerified;
+  const hasAllBadges = isRank1 && showCrown && isElite;
+  const hasRankAndCrown = isRank1 && showCrown && !isElite;
+  const hasRankOnly = isRank1 && !showCrown && !isElite;
+
+  let cardTheme = 'bg-white rounded-2xl border border-gold-200 shadow-luxury';
+  let headerTheme = 'bg-gradient-to-r from-gold-50 to-ivory-50 border-b border-gold-100';
+  let footerTheme = 'bg-gold-50 border-t border-gold-100';
+
+  if (hasAllBadges) {
+    // Ultra luxury theme for #1 + crown + elite
+    cardTheme = 'bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 rounded-2xl border-2 border-amber-400 shadow-2xl shadow-amber-500/30';
+    headerTheme = 'bg-gradient-to-r from-amber-100 via-yellow-100 to-amber-50 border-b-2 border-amber-400';
+    footerTheme = 'bg-gradient-to-r from-amber-100 to-yellow-100 border-t-2 border-amber-400';
+  } else if (hasRankAndCrown) {
+    // Professional premium theme for #1 + crown
+    cardTheme = 'bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl border-2 border-slate-400 shadow-xl shadow-slate-500/20';
+    headerTheme = 'bg-gradient-to-r from-slate-100 to-gray-200 border-b-2 border-slate-400';
+    footerTheme = 'bg-gradient-to-r from-slate-100 to-gray-200 border-t-2 border-slate-400';
+  } else if (hasRankOnly) {
+    // Premium theme for #1 only
+    cardTheme = 'bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border-2 border-purple-300 shadow-lg shadow-purple-500/20';
+    headerTheme = 'bg-gradient-to-r from-purple-100 to-indigo-100 border-b-2 border-purple-300';
+    footerTheme = 'bg-gradient-to-r from-purple-100 to-indigo-100 border-t-2 border-purple-300';
+  }
+
   return (
-    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full">
+    <div className={`${cardTheme} overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full`}>
       {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
       {business.autoRank && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
@@ -30,7 +58,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
       )}
 
       {/* Card Header with Logo and Badges */}
-      <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-4 sm:p-6 border-b border-gold-100">
+      <div className={`${headerTheme} p-4 sm:p-6`}>
         <div className="flex flex-col items-center gap-3">
           {business.logo && (
             <div className="flex-shrink-0">
@@ -134,7 +162,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
       </div>
 
       {/* Card Footer */}
-      <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gold-50 border-t border-gold-100">
+      <div className={`px-4 sm:px-6 py-3 sm:py-4 ${footerTheme}`}>
         <div className="flex gap-2">
           {business.website && (
             <a
