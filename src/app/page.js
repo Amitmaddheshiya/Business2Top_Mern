@@ -27,24 +27,24 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   let borderColor = 'border-gray-400';
 
   if (hasAllBadges) {
-    // #1 + crown + elite - golden yellow theme with dark blue border
+    // #1 + crown + elite - silver theme with dark blue border
     borderColor = 'border-blue-600';
-    cardTheme = 'bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl border-2 shadow-lg shadow-yellow-500/20';
-    headerTheme = 'bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-50 border-b-2';
-    footerTheme = 'bg-gradient-to-r from-yellow-100 to-amber-100 border-t-2';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
     animatedBorder = true;
   } else if (hasRankAndCrown) {
-    // #1 + crown - golden yellow theme with dark golden border
+    // #1 + crown - silver theme with dark golden border
     borderColor = 'border-amber-600';
-    cardTheme = 'bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl border-2 shadow-lg shadow-yellow-500/20';
-    headerTheme = 'bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-50 border-b-2';
-    footerTheme = 'bg-gradient-to-r from-yellow-100 to-amber-100 border-t-2';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   } else if (hasRankOnly) {
-    // #1 only - golden yellow theme with silver border
+    // #1 only - silver theme with silver border
     borderColor = 'border-gray-400';
-    cardTheme = 'bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl border-2 shadow-lg shadow-yellow-500/20';
-    headerTheme = 'bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-50 border-b-2';
-    footerTheme = 'bg-gradient-to-r from-yellow-100 to-amber-100 border-t-2';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   }
 
   cardTheme = cardTheme.replace('border-2', `border-2 ${borderColor}`);
