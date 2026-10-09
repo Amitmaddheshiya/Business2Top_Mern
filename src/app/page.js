@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback, memo } from 'react';
-import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown } from 'lucide-react';
+import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown, Info } from 'lucide-react';
 import Link from 'next/link';
 
-const BusinessCard = memo(({ business, index, onRate }) => {
+const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   const isTop10 = index < 10 || business.manualRank !== null;
 
   const getWhatsAppLink = (whatsappNumber, businessName) => {
@@ -14,7 +14,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
+    <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full">
       {/* Manual Rank Badge - Top Left (dynamic #1, #2, #3...) */}
       {business.manualRank !== null && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
@@ -31,30 +31,28 @@ const BusinessCard = memo(({ business, index, onRate }) => {
 
       {/* Card Header with Logo and Badges */}
       <div className="bg-gradient-to-r from-gold-50 to-ivory-50 p-4 sm:p-6 border-b border-gold-100">
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex flex-col items-center gap-3">
           {business.logo && (
             <div className="flex-shrink-0">
               <img
                 src={business.logo}
                 alt={business.name}
-                className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
                 onError={(e) => e.target.style.display = 'none'}
               />
             </div>
           )}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-start justify-between gap-2 mb-2">
+          <div className="text-center w-full">
+            <div className="flex items-center justify-center gap-2 mb-2">
               <h3 className="text-base sm:text-xl font-bold text-charcoal font-serif truncate">{business.name}</h3>
-              <div className="flex gap-1 flex-shrink-0">
-                {business.isVerified && (
-                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20">
-                    <CheckCircle className="w-3 h-3 text-white" />
-                    <span className="text-xs font-semibold text-white">Elite</span>
-                  </div>
-                )}
-              </div>
+              {business.isVerified && (
+                <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
+                  <CheckCircle className="w-3 h-3 text-white" />
+                  <span className="text-xs font-semibold text-white">Elite</span>
+                </div>
+              )}
             </div>
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
               <div className="flex items-center gap-1 bg-white px-2 sm:px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
                 <Star className="w-3 h-3 sm:w-4 sm:h-4 text-gold-500 fill-gold-500" />
                 <span className="font-bold text-gold-600 text-sm sm:text-base">{business.averageRating.toFixed(1)}</span>
@@ -66,7 +64,7 @@ const BusinessCard = memo(({ business, index, onRate }) => {
       </div>
 
       {/* Card Body */}
-      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 flex-1 overflow-hidden">
         {/* Description */}
         {business.description && (
           <p className="text-softgray text-xs sm:text-sm leading-relaxed line-clamp-2">{business.description}</p>
@@ -162,6 +160,14 @@ const BusinessCard = memo(({ business, index, onRate }) => {
               WhatsApp
             </a>
           )}
+          <button
+            onClick={() => onShowDetails(business)}
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-all duration-200 font-medium text-xs sm:text-sm"
+          >
+            <Info className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">More Details</span>
+            <span className="sm:hidden">Details</span>
+          </button>
         </div>
       </div>
     </div>
@@ -176,6 +182,8 @@ export default function Home() {
   const [sortFilter, setSortFilter] = useState('');
   const [loading, setLoading] = useState(true);
   const [showRatingSuccess, setShowRatingSuccess] = useState(false);
+  const [selectedBusiness, setSelectedBusiness] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchBusinesses = useCallback(async () => {
     setLoading(true);
@@ -241,6 +249,11 @@ export default function Home() {
     } catch (error) {
       console.error('Error rating business:', error);
     }
+  }, []);
+
+  const handleShowDetails = useCallback((business) => {
+    setSelectedBusiness(business);
+    setShowModal(true);
   }, []);
 
   return (
@@ -341,11 +354,116 @@ export default function Home() {
                 business={business}
                 index={index}
                 onRate={handleRate}
+                onShowDetails={handleShowDetails}
               />
             ))}
           </div>
         )}
       </div>
+
+      {/* Business Details Modal */}
+      {showModal && selectedBusiness && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gold-200 p-4 sm:p-6 flex justify-between items-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-charcoal font-serif">{selectedBusiness.name}</h2>
+              <button
+                onClick={() => setShowModal(false)}
+                className="p-2 rounded-lg border border-gold-200 text-charcoal hover:border-gold-500 hover:bg-gold-50 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 sm:p-6 space-y-4">
+              {selectedBusiness.logo && (
+                <div className="flex justify-center">
+                  <img
+                    src={selectedBusiness.logo}
+                    alt={selectedBusiness.name}
+                    className="w-32 h-32 object-contain rounded-xl border-2 border-gold-200 bg-white p-4 shadow-sm"
+                    onError={(e) => e.target.style.display = 'none'}
+                  />
+                </div>
+              )}
+              {selectedBusiness.description && (
+                <div>
+                  <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Description</p>
+                  <p className="text-softgray text-sm leading-relaxed">{selectedBusiness.description}</p>
+                </div>
+              )}
+              {selectedBusiness.productsAndServices && selectedBusiness.productsAndServices.length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Services</p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedBusiness.productsAndServices.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-xs bg-gold-50 text-gold-700 px-3 py-1.5 rounded-lg border border-gold-200 font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="space-y-3">
+                <p className="text-xs font-semibold text-charcoal uppercase tracking-wide">Contact Information</p>
+                <div className="space-y-2 text-sm">
+                  <p className="flex items-center gap-2">
+                    <span className="font-medium text-charcoal w-20">Phone:</span>
+                    <span className="text-charcoal">{selectedBusiness.contactNumber}</span>
+                  </p>
+                  {selectedBusiness.email && (
+                    <p className="flex items-center gap-2">
+                      <span className="font-medium text-charcoal w-20">Email:</span>
+                      <span className="text-charcoal">{selectedBusiness.email}</span>
+                    </p>
+                  )}
+                  <p className="flex items-start gap-2">
+                    <span className="font-medium text-charcoal w-20 mt-0.5">Address:</span>
+                    <span className="text-charcoal">{selectedBusiness.address}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pt-4 border-t border-gold-100">
+                <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-lg border border-gold-200 shadow-sm">
+                  <Star className="w-5 h-5 text-gold-500 fill-gold-500" />
+                  <span className="font-bold text-gold-600 text-lg">{selectedBusiness.averageRating.toFixed(1)}</span>
+                  <span className="text-sm text-softgray">({selectedBusiness.totalVotes} votes)</span>
+                </div>
+              </div>
+            </div>
+            <div className="sticky bottom-0 bg-gold-50 border-t border-gold-100 p-4 sm:p-6">
+              <div className="flex gap-2">
+                {selectedBusiness.website && (
+                  <a
+                    href={selectedBusiness.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-charcoal text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"
+                  >
+                    <Globe className="w-4 h-4" />
+                    Visit Website
+                  </a>
+                )}
+                {selectedBusiness.whatsappNumber && (
+                  <a
+                    href={`https://wa.me/${selectedBusiness.whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-medium"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    WhatsApp
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
