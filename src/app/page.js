@@ -24,27 +24,35 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   let headerTheme = 'bg-gradient-to-r from-gold-50 to-ivory-50 border-b border-gold-100';
   let footerTheme = 'bg-gold-50 border-t border-gold-100';
   let animatedBorder = false;
+  let borderColor = 'border-gray-400';
 
   if (hasAllBadges) {
-    // Ultra luxury theme for #1 + crown + elite - diamond/blue dark with animated border
-    cardTheme = 'bg-gradient-to-br from-blue-900 via-slate-900 to-blue-950 rounded-2xl border-2 border-transparent shadow-2xl shadow-blue-500/40';
-    headerTheme = 'bg-gradient-to-r from-blue-800 via-slate-800 to-blue-900 border-b-2 border-blue-400';
-    footerTheme = 'bg-gradient-to-r from-blue-800 to-slate-900 border-t-2 border-blue-400';
+    // #1 + crown + elite - silver theme with dark blue border
+    borderColor = 'border-blue-600';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
     animatedBorder = true;
   } else if (hasRankAndCrown) {
-    // Professional premium theme for #1 + crown - gold
-    cardTheme = 'bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl border-2 border-yellow-500 shadow-xl shadow-yellow-500/30';
-    headerTheme = 'bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-50 border-b-2 border-yellow-500';
-    footerTheme = 'bg-gradient-to-r from-yellow-100 to-amber-100 border-t-2 border-yellow-500';
+    // #1 + crown - silver theme with dark golden border
+    borderColor = 'border-amber-600';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   } else if (hasRankOnly) {
-    // Premium theme for #1 only - silver
-    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 border-gray-400 shadow-lg shadow-gray-500/20';
-    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2 border-gray-400';
-    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2 border-gray-400';
+    // #1 only - silver theme with silver border
+    borderColor = 'border-gray-400';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
+    footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   }
 
+  cardTheme = cardTheme.replace('border-2', `border-2 ${borderColor}`);
+  headerTheme = headerTheme.replace('border-b-2', `border-b-2 ${borderColor}`);
+  footerTheme = footerTheme.replace('border-t-2', `border-t-2 ${borderColor}`);
+
   return (
-    <div className={`${cardTheme} overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full ${animatedBorder ? 'animate-border-glow' : ''}`}>
+    <div className={`${cardTheme} overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full ${animatedBorder ? 'animate-border-rotate' : ''}`}>
       {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
       {business.autoRank && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
