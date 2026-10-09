@@ -13,7 +13,8 @@ export default function RootLayout({ children }) {
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gold-200 shadow-luxury">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <Link href="/" className="font-serif text-2xl font-bold text-gold-600 hover:text-gold-700 transition-colors">
+              <Link href="/" className="flex items-center gap-3 font-serif text-2xl font-bold text-gold-600 hover:text-gold-700 transition-colors">
+                <img src="/logo.png" alt="TrustMark Logo" className="h-10 w-10 object-contain" />
                 TrustMark
               </Link>
               <div className="flex space-x-8 items-center">

@@ -17,15 +17,15 @@ const BusinessCard = memo(({ business, index, onRate }) => {
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
       {/* Manual Rank Badge - Top Left (dynamic #1, #2, #3...) */}
       {business.manualRank !== null && (
-        <div className="absolute top-0 left-0 bg-black text-white px-3 py-1.5 rounded-br-xl rounded-tl-2xl z-10">
-          <span className="font-bold text-lg">#{business.manualRank}</span>
+        <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
+          <span className="font-bold text-sm">#{business.manualRank}</span>
         </div>
       )}
 
       {/* Crown Badge - Top Right attached */}
       {business.hasCrown && (
-        <div className="absolute top-0 right-0 bg-black text-white px-3 py-1.5 rounded-bl-xl rounded-tr-2xl z-10">
-          <Crown className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+        <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-bl-lg rounded-tr-xl z-10">
+          <Crown className="w-4 h-4 text-yellow-400 fill-yellow-400" />
         </div>
       )}
 
@@ -174,6 +174,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortFilter, setSortFilter] = useState('');
   const [loading, setLoading] = useState(true);
+  const [showRatingSuccess, setShowRatingSuccess] = useState(false);
 
   const fetchBusinesses = useCallback(async () => {
     setLoading(true);
@@ -215,7 +216,7 @@ export default function Home() {
   const handleRate = useCallback(async (businessId, rating) => {
     try {
       const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
-      
+
       if (ratedBusinesses.includes(businessId)) {
         alert('You have already rated this business');
         return;
@@ -226,11 +227,15 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating }),
       });
-      
+
       // Update local storage
       ratedBusinesses.push(businessId);
       localStorage.setItem('ratedBusinesses', JSON.stringify(ratedBusinesses));
-      
+
+      // Show success popup
+      setShowRatingSuccess(true);
+      setTimeout(() => setShowRatingSuccess(false), 3000);
+
       fetchBusinesses();
     } catch (error) {
       console.error('Error rating business:', error);
@@ -239,6 +244,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-ivory-50">
+      {/* Rating Success Popup */}
+      {showRatingSuccess && (
+        <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg shadow-green-500/30 animate-bounce">
+          <div className="flex items-center gap-2">
+            <Star className="w-5 h-5 fill-white" />
+            <span className="font-medium">Thank you for your rating!</span>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
