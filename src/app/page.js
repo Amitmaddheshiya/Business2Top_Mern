@@ -5,7 +5,9 @@ import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown, Info } f
 import Link from 'next/link';
 
 const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
-  const isTop10 = index < 10 || business.manualRank !== null;
+  // Calculate display rank: group by 10s (1-10 = #1, 11-20 = #2, etc.)
+  const displayRank = Math.ceil(business.autoRank / 10);
+  const isTop10 = business.autoRank <= 10;
 
   const getWhatsAppLink = (whatsappNumber, businessName) => {
     const cleanNumber = whatsappNumber.replace(/\D/g, '');
@@ -15,15 +17,15 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
 
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full">
-      {/* Manual Rank Badge - Top Left (dynamic #1, #2, #3...) */}
-      {business.manualRank !== null && (
+      {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
+      {business.autoRank && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
-          <span className="font-bold text-xs sm:text-sm">#{business.manualRank}</span>
+          <span className="font-bold text-xs sm:text-sm">#{displayRank}</span>
         </div>
       )}
 
-      {/* Crown Badge - Top Right attached */}
-      {business.hasCrown && (
+      {/* Crown Badge - Top Right attached (only for top 10 or admin enabled) */}
+      {(isTop10 || business.hasCrown) && (
         <div className="absolute top-0 right-0 bg-black text-white px-2 py-1 rounded-bl-lg rounded-tr-xl z-10">
           <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-yellow-400" />
         </div>

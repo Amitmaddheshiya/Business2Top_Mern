@@ -10,6 +10,7 @@ export default function EditBusiness({ params }) {
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [addingFakeRatings, setAddingFakeRatings] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -71,6 +72,38 @@ export default function EditBusiness({ params }) {
       setError(err.message);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleAddFakeRatings = async () => {
+    const count = document.getElementById('fakeRatingCount').value;
+    if (!count || count < 1) {
+      alert('Please enter a valid number');
+      return;
+    }
+
+    setAddingFakeRatings(true);
+    setError('');
+
+    try {
+      const response = await fetch(`/api/businesses/${params.id}/fake-ratings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ count: parseInt(count) }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add fake ratings');
+      }
+
+      alert(`Successfully added ${count} fake ratings`);
+      fetchBusiness(); // Refresh business data
+      document.getElementById('fakeRatingCount').value = '';
+    } catch (err) {
+      setError(err.message);
+      alert('Failed to add fake ratings');
+    } finally {
+      setAddingFakeRatings(false);
     }
   };
 
@@ -268,6 +301,28 @@ export default function EditBusiness({ params }) {
                   />
                   <span className="text-sm font-medium text-charcoal">Award Crown Badge</span>
                 </label>
+              </div>
+
+              <div className="pt-4">
+                <label className="block text-sm font-medium text-charcoal mb-2">Add Fake Ratings</label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="Number of ratings to add (e.g., 10, 20, 100)"
+                    className="flex-1 px-4 py-2 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                    id="fakeRatingCount"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddFakeRatings}
+                    disabled={addingFakeRatings}
+                    className="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
+                  >
+                    {addingFakeRatings ? 'Adding...' : 'Add Ratings'}
+                  </button>
+                </div>
+                <p className="text-xs text-softgray mt-1">This will add the specified number of 5-star ratings to this business</p>
               </div>
             </div>
 

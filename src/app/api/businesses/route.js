@@ -32,7 +32,17 @@ export async function GET(request) {
 
     const businesses = await Business.find(query).sort(sortOptions).lean();
 
-    return Response.json(businesses, {
+    // Calculate automatic rank based on rating
+    const businessesWithRank = businesses.map((business, index) => {
+      // If admin has set manualRank, use it
+      if (business.manualRank !== null) {
+        return { ...business, autoRank: business.manualRank };
+      }
+      // Otherwise, calculate automatic rank (1-based index)
+      return { ...business, autoRank: index + 1 };
+    });
+
+    return Response.json(businessesWithRank, {
       headers: {
         'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
       },
