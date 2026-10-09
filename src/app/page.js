@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, memo } from 'react';
-import { Search, Star, Globe, MessageCircle, CheckCircle, Check } from 'lucide-react';
+import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown } from 'lucide-react';
 import Link from 'next/link';
 
 const BusinessCard = memo(({ business, index, onRate }) => {
@@ -9,20 +9,20 @@ const BusinessCard = memo(({ business, index, onRate }) => {
 
   const getWhatsAppLink = (whatsappNumber, businessName) => {
     const cleanNumber = whatsappNumber.replace(/\D/g, '');
-    const message = encodeURIComponent(`Hello! I found ${businessName} on Business2Top and would like to inquire about your services.`);
+    const message = encodeURIComponent(`Hello! I found ${businessName} on TrustMark and would like to inquire about your services.`);
     return `https://wa.me/${cleanNumber}?text=${message}`;
   };
 
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
       {/* #1 Elite Badge - Top Right */}
-      {(business.manualRank === 1 || business.isVerified) && (
+      {(business.manualRank === 1 || business.isVerified || business.hasCrown) && (
         <div className="absolute top-4 right-4 z-10">
           <div className="relative w-12 h-12 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full animate-pulse shadow-lg shadow-gold-500/50"></div>
-            <div className="absolute inset-1 bg-gradient-to-br from-gold-300 to-gold-500 rounded-full animate-bounce shadow-inner"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-lg shadow-blue-500/50"></div>
+            <div className="absolute inset-1 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full shadow-inner"></div>
             <div className="relative z-10 flex flex-col items-center justify-center">
-              <span className="text-white font-bold text-sm drop-shadow-lg">#1</span>
+              <Crown className="w-5 h-5 text-yellow-300 fill-yellow-300 drop-shadow-lg" />
               <div className="flex items-center gap-0.5">
                 <Check className="w-2 h-2 text-white fill-white" />
                 <span className="text-white text-xs font-semibold drop-shadow-md">Elite</span>
@@ -250,7 +250,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-charcoal font-serif">Business2Top</h1>
+          <h1 className="text-3xl font-bold text-charcoal font-serif">TrustMark</h1>
           <Link
             href="/owner-login"
             className="px-4 py-2 bg-gold-500 text-white rounded-xl hover:bg-gold-600 transition-colors font-medium"

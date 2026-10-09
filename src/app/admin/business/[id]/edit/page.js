@@ -256,6 +256,19 @@ export default function EditBusiness({ params }) {
                   <span className="text-sm font-medium text-charcoal">Verified Business</span>
                 </label>
               </div>
+
+              <div className="flex items-center gap-3 pt-6">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="hasCrown"
+                    checked={business.hasCrown || false}
+                    onChange={(e) => setBusiness({ ...business, hasCrown: e.target.checked })}
+                    className="w-5 h-5 rounded border-gold-300 text-gold-600 focus:ring-gold-500"
+                  />
+                  <span className="text-sm font-medium text-charcoal">Award Crown Badge</span>
+                </label>
+              </div>
             </div>
 
             <div className="flex gap-4">
