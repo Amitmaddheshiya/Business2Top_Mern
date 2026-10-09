@@ -32,7 +32,7 @@ export default function Navbar() {
             <span className="hidden sm:inline">TrustMark</span>
           </Link>
 
-          {/* Brand Ad - Center */}
+          {/* Brand Ad - Center (Desktop) */}
           {activeAd && (
             <a
               href={activeAd.linkUrl}
@@ -40,11 +40,49 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="hidden md:flex flex-1 justify-center px-4"
             >
-              <img
-                src={activeAd.imageUrl}
-                alt={activeAd.brandName}
-                className="h-12 w-auto max-w-xs object-contain hover:scale-105 transition-transform"
-              />
+              {activeAd.offerText ? (
+                <div className="text-center">
+                  <p className="text-lg font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse">
+                    {activeAd.offerText}
+                  </p>
+                  {activeAd.subtitle && (
+                    <p className="text-xs text-softgray animate-bounce">{activeAd.subtitle}</p>
+                  )}
+                </div>
+              ) : (
+                <img
+                  src={activeAd.imageUrl}
+                  alt={activeAd.brandName}
+                  className="h-12 w-auto max-w-xs object-contain hover:scale-105 transition-transform"
+                />
+              )}
+            </a>
+          )}
+
+          {/* Mobile Ad - Between Logo and Burger */}
+          {activeAd && (
+            <a
+              href={activeAd.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="md:hidden flex-1 mx-2"
+            >
+              {activeAd.offerText ? (
+                <div className="text-center">
+                  <p className="text-sm font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse truncate">
+                    {activeAd.offerText}
+                  </p>
+                  {activeAd.subtitle && (
+                    <p className="text-xs text-softgray animate-bounce truncate">{activeAd.subtitle}</p>
+                  )}
+                </div>
+              ) : (
+                <img
+                  src={activeAd.imageUrl}
+                  alt={activeAd.brandName}
+                  className="h-10 w-full object-contain"
+                />
+              )}
             </a>
           )}
 
@@ -70,21 +108,6 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gold-200">
           <div className="px-4 py-3 space-y-2">
-            {/* Mobile Ad */}
-            {activeAd && (
-              <a
-                href={activeAd.linkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mb-2"
-              >
-                <img
-                  src={activeAd.imageUrl}
-                  alt={activeAd.brandName}
-                  className="h-10 w-full object-contain"
-                />
-              </a>
-            )}
             <Link
               href="/"
               className="block px-3 py-2 text-charcoal hover:text-gold-600 hover:bg-gold-50 rounded-lg transition-colors font-medium"

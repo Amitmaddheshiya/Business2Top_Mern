@@ -14,6 +14,9 @@ export default function ManageAds() {
     brandName: '',
     imageUrl: '',
     linkUrl: '',
+    offerText: '',
+    subtitle: '',
+    videoUrl: '',
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -54,7 +57,7 @@ export default function ManageAds() {
         throw new Error('Failed to create ad');
       }
 
-      setNewAd({ brandName: '', imageUrl: '', linkUrl: '' });
+      setNewAd({ brandName: '', imageUrl: '', linkUrl: '', offerText: '', subtitle: '', videoUrl: '' });
       setShowForm(false);
       fetchAds();
     } catch (err) {
@@ -159,6 +162,39 @@ export default function ManageAds() {
                   placeholder="Enter destination URL (e.g., https://brand.com)"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-charcoal mb-2">Offer Text (Optional)</label>
+                <input
+                  type="text"
+                  value={newAd.offerText}
+                  onChange={(e) => setNewAd({ ...newAd, offerText: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                  placeholder="e.g., BIG OFFER, Buy 1 Get 2"
+                />
+                <p className="text-xs text-softgray mt-1">This will be shown as animated colorful text in navbar</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-charcoal mb-2">Subtitle (Optional)</label>
+                <input
+                  type="text"
+                  value={newAd.subtitle}
+                  onChange={(e) => setNewAd({ ...newAd, subtitle: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                  placeholder="e.g., Limited time offer"
+                />
+                <p className="text-xs text-softgray mt-1">Smaller animated text below offer text</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-charcoal mb-2">Video URL (Optional)</label>
+                <input
+                  type="url"
+                  value={newAd.videoUrl}
+                  onChange={(e) => setNewAd({ ...newAd, videoUrl: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                  placeholder="e.g., https://youtube.com/watch?v=xxx"
+                />
+                <p className="text-xs text-softgray mt-1">YouTube or video link (will be shown if image is not provided)</p>
+              </div>
               <div className="flex gap-4 pt-4">
                 <button
                   type="submit"
@@ -187,12 +223,23 @@ export default function ManageAds() {
                 <h3 className="font-bold text-charcoal">{ad.brandName}</h3>
               </div>
               <div className="p-4">
+                {ad.offerText && (
+                  <p className="text-sm font-bold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent mb-2">
+                    {ad.offerText}
+                  </p>
+                )}
+                {ad.subtitle && (
+                  <p className="text-xs text-softgray mb-2">{ad.subtitle}</p>
+                )}
                 <img
                   src={ad.imageUrl}
                   alt={ad.brandName}
                   className="w-full h-32 object-contain rounded-lg border border-gold-200 mb-4"
                   onError={(e) => e.target.src = '/placeholder.png'}
                 />
+                {ad.videoUrl && (
+                  <p className="text-xs text-softgray mb-2 truncate">📹 {ad.videoUrl}</p>
+                )}
                 <p className="text-xs text-softgray mb-2 truncate">{ad.linkUrl}</p>
                 <div className="flex items-center gap-2">
                   <span className={`px-2 py-1 rounded-lg text-xs font-medium ${ad.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>

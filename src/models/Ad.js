@@ -13,6 +13,18 @@ const AdSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  offerText: {
+    type: String,
+    default: '',
+  },
+  subtitle: {
+    type: String,
+    default: '',
+  },
+  videoUrl: {
+    type: String,
+    default: '',
+  },
   isActive: {
     type: Boolean,
     default: true,
