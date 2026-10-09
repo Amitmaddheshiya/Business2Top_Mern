@@ -15,18 +15,28 @@ const BusinessCard = memo(({ business, index, onRate }) => {
 
   return (
     <div className="bg-white rounded-2xl border border-gold-200 shadow-luxury overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative">
-      {/* #1 Elite Badge - Top Right */}
-      {(business.manualRank === 1 || business.isVerified || business.hasCrown) && (
-        <div className="absolute top-4 right-4 z-10">
-          <div className="relative w-12 h-12 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-lg shadow-blue-500/50"></div>
-            <div className="absolute inset-1 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full shadow-inner"></div>
-            <div className="relative z-10 flex flex-col items-center justify-center">
-              <Crown className="w-5 h-5 text-yellow-300 fill-yellow-300 drop-shadow-lg" />
-              <div className="flex items-center gap-0.5">
-                <Check className="w-2 h-2 text-white fill-white" />
-                <span className="text-white text-xs font-semibold drop-shadow-md">Elite</span>
-              </div>
+      {/* #1 Badge - Top Left */}
+      {business.manualRank === 1 && (
+        <div className="absolute top-0 left-0 bg-black text-white px-3 py-1.5 rounded-br-xl rounded-tl-2xl z-10">
+          <span className="font-bold text-lg">#1</span>
+        </div>
+      )}
+
+      {/* Crown Badge - Top Right (no background) */}
+      {business.hasCrown && (
+        <div className="absolute top-2 right-2 z-10">
+          <Crown className="w-8 h-8 text-yellow-500 fill-yellow-500 drop-shadow-lg" />
+        </div>
+      )}
+
+      {/* Elite Badge with Tick - Top Right (below crown) */}
+      {business.isVerified && (
+        <div className="absolute top-12 right-2 z-10">
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-blue-600 rounded-full shadow-lg shadow-blue-500/30"></div>
+            <div className="relative z-10 flex items-center gap-1">
+              <Check className="w-3 h-3 text-white fill-white" />
+              <span className="text-xs font-semibold text-white">Elite</span>
             </div>
           </div>
         </div>
