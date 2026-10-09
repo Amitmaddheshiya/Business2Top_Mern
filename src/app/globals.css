@@ -45,6 +45,15 @@
   }
 }
 
+@keyframes conic-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
@@ -55,4 +64,22 @@
 
 .animate-border-rotate {
   animation: border-rotate 2s linear infinite;
+}
+
+.animate-conic-rotate {
+  animation: conic-rotate 2s linear infinite;
+}
+
+.border-animated {
+  position: relative;
+}
+
+.border-animated::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 1rem;
+  background: conic-gradient(from 0deg, #2563eb, #3b82f6, #60a5fa, #22d3ee, #2563eb);
+  animation: conic-rotate 2s linear infinite;
+  z-index: -1;
 }
