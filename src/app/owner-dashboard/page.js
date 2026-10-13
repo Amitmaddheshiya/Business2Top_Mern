@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, Plus } from 'lucide-react';
 import Link from 'next/link';
+import { formatNumber } from '@/lib/formatNumber';
 
 export default function OwnerDashboard() {
   const router = useRouter();
@@ -138,7 +139,7 @@ export default function OwnerDashboard() {
                           {business.averageRating.toFixed(1)}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-softgray">{business.totalVotes}</td>
+                      <td className="py-4 px-4 text-softgray">{formatNumber(business.totalVotes)}</td>
                       <td className="py-4 px-4">
                         {business.isVerified ? (
                           <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">Verified</span>

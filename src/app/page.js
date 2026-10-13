@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, memo, createContext, useContext } from 'react';
 import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown, Info } from 'lucide-react';
 import Link from 'next/link';
+import { formatNumber } from '@/lib/formatNumber';
 
 // Create Theme Context
 const ThemeContext = createContext({
@@ -193,7 +194,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails, themeIndex 
               }`}
             >
               <span>{business.isRated ? 'Voted' : 'Vote'}</span>
-              <span className="bg-white/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
+              <span className="bg-white/20 px-2 py-1 rounded-lg">{formatNumber(business.totalVotes)}</span>
             </button>
           </div>
           {/* Middle: Business Name */}

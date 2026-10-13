@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Trash2, Check, X, LogOut } from 'lucide-react';
 import { isAuthenticated, logout } from '@/lib/auth';
+import { formatNumber } from '@/lib/formatNumber';
 
 export default function Admin() {
   const router = useRouter();
@@ -169,7 +170,7 @@ export default function Admin() {
                           {business.averageRating.toFixed(1)}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-softgray">{business.totalVotes}</td>
+                      <td className="py-4 px-4 text-softgray">{formatNumber(business.totalVotes)}</td>
                       <td className="py-4 px-4">
                         <button
                           onClick={(e) => {
