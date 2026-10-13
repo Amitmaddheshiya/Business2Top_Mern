@@ -67,40 +67,32 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
         </div>
       )}
 
-      {/* Card Header with Logo and Badges */}
-      <div className={`${headerTheme} p-4 sm:p-6`}>
-        <div className="flex flex-col items-center gap-3">
-          {business.logo && (
-            <div className="flex-shrink-0">
-              <img
-                src={business.logo}
-                alt={business.name}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-xl border-2 border-gold-200 bg-white p-2 shadow-sm"
-                onError={(e) => e.target.style.display = 'none'}
-              />
-            </div>
-          )}
-          <div className="text-center w-full">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <h3 className="text-base sm:text-xl font-bold text-charcoal font-serif truncate">{business.name}</h3>
-              {business.isVerified && (
-                <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
-                  <CheckCircle className="w-3 h-3 text-white" />
-                  <span className="text-xs font-semibold text-white">Elite</span>
-                </div>
-              )}
-            </div>
-            {business.uniqueId && (
-              <p className="text-xs text-softgray mb-2">ID: {business.uniqueId}</p>
-            )}
-            <div className="flex items-center justify-center gap-2 sm:gap-3">
-              <div className="flex items-center gap-1 bg-white px-2 sm:px-3 py-1 rounded-lg border border-gold-200 shadow-sm">
-                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-gold-500 fill-gold-500" />
-                <span className="font-bold text-gold-600 text-sm sm:text-base">{business.averageRating.toFixed(1)}</span>
-                <span className="text-xs text-softgray">({business.totalVotes})</span>
-              </div>
-            </div>
+      {/* Card Header with Background Image and Text Overlay */}
+      <div className={`${headerTheme} relative p-4 sm:p-6 min-h-[120px]`}>
+        {business.logo && (
+          <div className="absolute inset-0 z-0">
+            <img
+              src={business.logo}
+              alt={business.name}
+              className="w-full h-full object-cover"
+              onError={(e) => e.target.style.display = 'none'}
+            />
+            <div className="absolute inset-0 bg-black/40" />
           </div>
+        )}
+        <div className="relative z-10 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <h3 className="text-base sm:text-xl font-bold text-white font-serif truncate">{business.name}</h3>
+            {business.isVerified && (
+              <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
+                <CheckCircle className="w-3 h-3 text-white" />
+                <span className="text-xs font-semibold text-white">Elite</span>
+              </div>
+            )}
+          </div>
+          {business.uniqueId && (
+            <p className="text-xs text-white/80 mb-2">ID: {business.uniqueId}</p>
+          )}
         </div>
       </div>
 
@@ -148,26 +140,21 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           </div>
         </div>
 
-        {/* Rating Section */}
+        {/* Vote Section */}
         <div className="pt-3 sm:pt-4 border-t border-gold-100">
-          <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Rate this business</p>
-          <div className="flex gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                onClick={() => onRate(business._id, star)}
-                className="hover:scale-110 transition-transform"
-              >
-                <Star
-                  className={`w-4 h-4 sm:w-6 sm:h-6 ${
-                    business.isRated
-                      ? 'text-gold-500 fill-gold-500'
-                      : 'text-gray-300'
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
+          <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Vote for this business</p>
+          <button
+            onClick={() => onRate(business._id)}
+            disabled={business.isRated}
+            className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium text-sm sm:text-base transition-all ${
+              business.isRated
+                ? 'bg-gold-100 text-gold-400 cursor-not-allowed'
+                : 'bg-gold-500 text-white hover:bg-gold-600 hover:shadow-lg hover:shadow-gold-500/30'
+            }`}
+          >
+            <span>{business.isRated ? 'Voted' : 'Vote'}</span>
+            <span className="bg-white/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
+          </button>
         </div>
       </div>
 
@@ -226,10 +213,10 @@ export default function Home() {
       const response = await fetch(url);
       const data = await response.json();
       if (Array.isArray(data)) {
-        const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
+        const votedBusinesses = JSON.parse(localStorage.getItem('votedBusinesses') || '[]');
         const businessesWithRating = data.map(business => ({
           ...business,
-          isRated: ratedBusinesses.includes(business._id)
+          isRated: votedBusinesses.includes(business._id)
         }));
         setBusinesses(businessesWithRating);
       } else {
@@ -248,24 +235,23 @@ export default function Home() {
     fetchBusinesses();
   }, [fetchBusinesses]);
 
-  const handleRate = useCallback(async (businessId, rating) => {
+  const handleRate = useCallback(async (businessId) => {
     try {
-      const ratedBusinesses = JSON.parse(localStorage.getItem('ratedBusinesses') || '[]');
+      const votedBusinesses = JSON.parse(localStorage.getItem('votedBusinesses') || '[]');
 
-      if (ratedBusinesses.includes(businessId)) {
-        alert('You have already rated this business');
+      if (votedBusinesses.includes(businessId)) {
+        alert('You have already voted for this business');
         return;
       }
 
-      await fetch(`/api/businesses/${businessId}/rate`, {
+      await fetch(`/api/businesses/${businessId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rating }),
       });
 
       // Update local storage
-      ratedBusinesses.push(businessId);
-      localStorage.setItem('ratedBusinesses', JSON.stringify(ratedBusinesses));
+      votedBusinesses.push(businessId);
+      localStorage.setItem('votedBusinesses', JSON.stringify(votedBusinesses));
 
       // Show success popup
       setShowRatingSuccess(true);
@@ -273,7 +259,7 @@ export default function Home() {
 
       fetchBusinesses();
     } catch (error) {
-      console.error('Error rating business:', error);
+      console.error('Error voting for business:', error);
     }
   }, []);
 
@@ -284,12 +270,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-ivory-50">
-      {/* Rating Success Popup */}
+      {/* Vote Success Popup */}
       {showRatingSuccess && (
         <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg shadow-green-500/30 animate-bounce">
           <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 fill-white" />
-            <span className="font-medium">Thank you for your rating!</span>
+            <CheckCircle className="w-5 h-5 fill-white" />
+            <span className="font-medium">Thank you for your vote!</span>
           </div>
         </div>
       )}
@@ -451,9 +437,8 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-3 pt-4 border-t border-gold-100">
                 <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-lg border border-gold-200 shadow-sm">
-                  <Star className="w-5 h-5 text-gold-500 fill-gold-500" />
-                  <span className="font-bold text-gold-600 text-lg">{selectedBusiness.averageRating.toFixed(1)}</span>
-                  <span className="text-sm text-softgray">({selectedBusiness.totalVotes} votes)</span>
+                  <span className="font-bold text-gold-600 text-lg">{selectedBusiness.totalVotes}</span>
+                  <span className="text-sm text-softgray">votes</span>
                 </div>
               </div>
             </div>
