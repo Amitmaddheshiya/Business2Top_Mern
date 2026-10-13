@@ -88,32 +88,12 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           </div>
         )}
         <div className="relative z-10 flex flex-col justify-between h-full">
-          <div className="text-center">
-            {business.description && (
-              <p className="text-xs sm:text-sm text-white/90 leading-relaxed line-clamp-2 mb-3">{business.description}</p>
-            )}
-          </div>
-          {/* Bottom Section: Business Name and Vote Button */}
-          <div className="flex items-center justify-between gap-3 mt-auto">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-base sm:text-xl font-bold text-white font-serif truncate">{cleanName}</h3>
-                {business.isVerified && (
-                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
-                    <CheckCircle className="w-3 h-3 text-white" />
-                    <span className="text-xs font-semibold text-white">Elite</span>
-                  </div>
-                )}
-              </div>
-              {business.uniqueId && (
-                <p className="text-xs text-white/80">ID: {business.uniqueId}</p>
-              )}
-            </div>
-            {/* Vote Button in Header - Bottom Right */}
+          {/* Top: Vote Button */}
+          <div className="flex justify-end">
             <button
               onClick={() => onRate(business._id)}
               disabled={business.isRated}
-              className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm sm:text-base transition-all flex-shrink-0 ${
+              className={`flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all flex-shrink-0 ${
                 business.isRated
                   ? 'bg-green-700/50 text-white/60 cursor-not-allowed'
                   : 'bg-green-600 text-white hover:bg-green-700 hover:shadow-lg hover:shadow-green-500/30'
@@ -122,6 +102,27 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
               <span>{business.isRated ? 'Voted' : 'Vote'}</span>
               <span className="bg-white/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
             </button>
+          </div>
+          {/* Middle: Business Name */}
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="text-base sm:text-xl font-bold text-blue-900 font-serif truncate">{cleanName}</h3>
+              {business.isVerified && (
+                <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
+                  <CheckCircle className="w-3 h-3 text-white" />
+                  <span className="text-xs font-semibold text-white">Elite</span>
+                </div>
+              )}
+            </div>
+            {business.uniqueId && (
+              <p className="text-xs text-white/80">ID: {business.uniqueId}</p>
+            )}
+          </div>
+          {/* Bottom: Description */}
+          <div className="overflow-hidden">
+            {business.description && (
+              <p className="text-xs sm:text-sm text-white/90 leading-relaxed line-clamp-3">{business.description}</p>
+            )}
           </div>
         </div>
       </div>
