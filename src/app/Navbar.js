@@ -115,6 +115,9 @@ export default function Navbar() {
             <Link href="/" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
               Home Directory
             </Link>
+            <Link href="/search" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
+              Search
+            </Link>
             <button
               onClick={handleThemeChange}
               className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gold-200 text-charcoal hover:border-gold-500 hover:bg-gold-50 transition-colors"
@@ -147,6 +150,13 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Home Directory
+            </Link>
+            <Link
+              href="/search"
+              className="block px-3 py-2 text-charcoal hover:text-gold-600 hover:bg-gold-50 rounded-lg transition-colors font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Search
             </Link>
             <button
               onClick={() => {
