@@ -5,6 +5,12 @@ import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown, Info } f
 import Link from 'next/link';
 
 const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
+  // Clean business name by removing 'office of the' and 'office of'
+  const cleanName = business.name
+    .replace(/office of the/gi, '')
+    .replace(/office of/gi, '')
+    .trim();
+
   // Calculate display rank: use manualRank if set by admin, otherwise use autoRank
   const effectiveRank = business.manualRank || business.autoRank;
   const displayRank = Math.ceil(effectiveRank / 10);
@@ -68,53 +74,60 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
       )}
 
       {/* Card Header with Background Image and Text Overlay */}
-      <div className={`${headerTheme} relative p-4 sm:p-6 min-h-[200px]`}>
+      <div className={`${headerTheme} relative p-6 sm:p-8 min-h-[280px]`}>
         {business.logo && (
           <div className="absolute inset-0 z-0">
             <img
               src={business.logo}
               alt={business.name}
               className="w-full h-full object-cover"
+              style={{ objectPosition: 'center' }}
               onError={(e) => e.target.style.display = 'none'}
             />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/50" />
           </div>
         )}
-        <div className="relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <h3 className="text-base sm:text-xl font-bold text-white font-serif truncate">{business.name}</h3>
-            {business.isVerified && (
-              <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
-                <CheckCircle className="w-3 h-3 text-white" />
-                <span className="text-xs font-semibold text-white">Elite</span>
-              </div>
+        <div className="relative z-10 flex flex-col justify-between h-full">
+          <div className="text-center">
+            {business.description && (
+              <p className="text-xs sm:text-sm text-white/90 leading-relaxed line-clamp-2 mb-3">{business.description}</p>
             )}
           </div>
-          {business.uniqueId && (
-            <p className="text-xs text-white/80 mb-2">ID: {business.uniqueId}</p>
-          )}
-          {/* Vote Button in Header */}
-          <button
-            onClick={() => onRate(business._id)}
-            disabled={business.isRated}
-            className={`mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium text-sm sm:text-base transition-all ${
-              business.isRated
-                ? 'bg-white/20 text-white/60 cursor-not-allowed'
-                : 'bg-white text-charcoal hover:bg-white/90 hover:shadow-lg'
-            }`}
-          >
-            <span>{business.isRated ? 'Voted' : 'Vote'}</span>
-            <span className="bg-charcoal/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
-          </button>
+          {/* Bottom Section: Business Name and Vote Button */}
+          <div className="flex items-center justify-between gap-3 mt-auto">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-base sm:text-xl font-bold text-white font-serif truncate">{cleanName}</h3>
+                {business.isVerified && (
+                  <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
+                    <CheckCircle className="w-3 h-3 text-white" />
+                    <span className="text-xs font-semibold text-white">Elite</span>
+                  </div>
+                )}
+              </div>
+              {business.uniqueId && (
+                <p className="text-xs text-white/80">ID: {business.uniqueId}</p>
+              )}
+            </div>
+            {/* Vote Button in Header - Bottom Right */}
+            <button
+              onClick={() => onRate(business._id)}
+              disabled={business.isRated}
+              className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm sm:text-base transition-all flex-shrink-0 ${
+                business.isRated
+                  ? 'bg-green-700/50 text-white/60 cursor-not-allowed'
+                  : 'bg-green-600 text-white hover:bg-green-700 hover:shadow-lg hover:shadow-green-500/30'
+              }`}
+            >
+              <span>{business.isRated ? 'Voted' : 'Vote'}</span>
+              <span className="bg-white/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Card Body */}
       <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 flex-1 overflow-hidden">
-        {/* Description */}
-        {business.description && (
-          <p className="text-softgray text-xs sm:text-sm leading-relaxed line-clamp-2">{business.description}</p>
-        )}
 
         {/* Products & Services */}
         {business.productsAndServices && business.productsAndServices.length > 0 && (
@@ -241,20 +254,29 @@ export default function Home() {
         return;
       }
 
-      await fetch(`/api/businesses/${businessId}/vote`, {
+      const response = await fetch(`/api/businesses/${businessId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
+
+      const updatedBusiness = await response.json();
 
       // Update local storage
       votedBusinesses.push(businessId);
       localStorage.setItem('votedBusinesses', JSON.stringify(votedBusinesses));
 
+      // Update local state immediately
+      setBusinesses(prevBusinesses =>
+        prevBusinesses.map(b =>
+          b._id === businessId
+            ? { ...b, totalVotes: updatedBusiness.totalVotes, isRated: true }
+            : b
+        )
+      );
+
       // Show success popup
       setShowRatingSuccess(true);
       setTimeout(() => setShowRatingSuccess(false), 3000);
-
-      fetchBusinesses();
     } catch (error) {
       console.error('Error voting for business:', error);
     }
