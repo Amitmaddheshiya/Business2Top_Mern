@@ -20,7 +20,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   const hasRankAndCrown = isRank1 && showCrown && !isElite;
   const hasRankOnly = isRank1 && !showCrown && !isElite;
 
-  let cardTheme = 'bg-transparent rounded-2xl border border-gold-200 shadow-luxury';
+  let cardTheme = 'bg-white rounded-2xl border border-gold-200 shadow-luxury';
   let headerTheme = 'bg-gradient-to-r from-gold-50 to-ivory-50 border-b border-gold-100';
   let footerTheme = 'bg-gold-50 border-t border-gold-100';
   let animatedBorder = false;
@@ -29,20 +29,20 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   if (hasAllBadges) {
     // #1 + crown + elite - silver theme with dark blue border
     borderColor = 'border-blue-600';
-    cardTheme = 'bg-transparent rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
     headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
     footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
     animatedBorder = true;
   } else if (hasRankAndCrown) {
     // #1 + crown - silver theme with dark golden border
     borderColor = 'border-amber-600';
-    cardTheme = 'bg-transparent rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
     headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
     footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   } else if (hasRankOnly) {
     // #1 only - silver theme with silver border
     borderColor = 'border-gray-400';
-    cardTheme = 'bg-transparent rounded-2xl border-2 shadow-lg shadow-gray-500/20';
+    cardTheme = 'bg-gradient-to-br from-gray-100 via-slate-200 to-gray-300 rounded-2xl border-2 shadow-lg shadow-gray-500/20';
     headerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-b-2';
     footerTheme = 'bg-gradient-to-r from-gray-200 to-slate-300 border-t-2';
   }
@@ -53,19 +53,6 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
 
   return (
     <div className={`${cardTheme} overflow-hidden hover:shadow-2xl hover:shadow-gold-200/50 transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col h-full ${animatedBorder ? 'animate-border-rotate' : ''}`}>
-      {/* Full Card Background Image */}
-      {business.logo && (
-        <div className="absolute inset-0 z-0">
-          <img
-            src={business.logo}
-            alt={business.name}
-            className="w-full h-full object-cover"
-            onError={(e) => e.target.style.display = 'none'}
-          />
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
-      )}
-
       {/* Rank Badge - Top Left (grouped by 10s: #1 for 1-10, #2 for 11-20, etc.) */}
       {business.autoRank && (
         <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded-br-lg rounded-tl-xl z-10">
@@ -80,8 +67,19 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
         </div>
       )}
 
-      {/* Card Header with Text Overlay */}
-      <div className={`${headerTheme} relative p-4 sm:p-6 min-h-[120px] bg-transparent border-none`}>
+      {/* Card Header with Background Image and Text Overlay */}
+      <div className={`${headerTheme} relative p-4 sm:p-6 min-h-[200px]`}>
+        {business.logo && (
+          <div className="absolute inset-0 z-0">
+            <img
+              src={business.logo}
+              alt={business.name}
+              className="w-full h-full object-cover"
+              onError={(e) => e.target.style.display = 'none'}
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+        )}
         <div className="relative z-10 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <h3 className="text-base sm:text-xl font-bold text-white font-serif truncate">{business.name}</h3>
@@ -95,11 +93,24 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           {business.uniqueId && (
             <p className="text-xs text-white/80 mb-2">ID: {business.uniqueId}</p>
           )}
+          {/* Vote Button in Header */}
+          <button
+            onClick={() => onRate(business._id)}
+            disabled={business.isRated}
+            className={`mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium text-sm sm:text-base transition-all ${
+              business.isRated
+                ? 'bg-white/20 text-white/60 cursor-not-allowed'
+                : 'bg-white text-charcoal hover:bg-white/90 hover:shadow-lg'
+            }`}
+          >
+            <span>{business.isRated ? 'Voted' : 'Vote'}</span>
+            <span className="bg-charcoal/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
+          </button>
         </div>
       </div>
 
       {/* Card Body */}
-      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 flex-1 overflow-hidden relative z-10 bg-white/90 backdrop-blur-sm">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 flex-1 overflow-hidden">
         {/* Description */}
         {business.description && (
           <p className="text-softgray text-xs sm:text-sm leading-relaxed line-clamp-2">{business.description}</p>
@@ -142,26 +153,10 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           </div>
         </div>
 
-        {/* Vote Section */}
-        <div className="pt-3 sm:pt-4 border-t border-gold-100">
-          <p className="text-xs font-semibold text-charcoal mb-2 uppercase tracking-wide">Vote for this business</p>
-          <button
-            onClick={() => onRate(business._id)}
-            disabled={business.isRated}
-            className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium text-sm sm:text-base transition-all ${
-              business.isRated
-                ? 'bg-gold-100 text-gold-400 cursor-not-allowed'
-                : 'bg-gold-500 text-white hover:bg-gold-600 hover:shadow-lg hover:shadow-gold-500/30'
-            }`}
-          >
-            <span>{business.isRated ? 'Voted' : 'Vote'}</span>
-            <span className="bg-white/20 px-2 py-1 rounded-lg">{business.totalVotes}</span>
-          </button>
-        </div>
       </div>
 
       {/* Card Footer */}
-      <div className={`px-4 sm:px-6 py-3 sm:py-4 ${footerTheme} relative z-10 bg-white/90 backdrop-blur-sm border-t border-gold-200`}>
+      <div className={`px-4 sm:px-6 py-3 sm:py-4 ${footerTheme}`}>
         <div className="flex gap-2">
           {business.website && (
             <a
@@ -246,41 +241,24 @@ export default function Home() {
         return;
       }
 
-      const response = await fetch(`/api/businesses/${businessId}/vote`, {
+      await fetch(`/api/businesses/${businessId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to vote');
-      }
-
-      const updatedBusiness = await response.json();
 
       // Update local storage
       votedBusinesses.push(businessId);
       localStorage.setItem('votedBusinesses', JSON.stringify(votedBusinesses));
 
-      // Update local state immediately
-      setBusinesses(prevBusinesses =>
-        prevBusinesses.map(b =>
-          b._id === businessId
-            ? { ...b, totalVotes: updatedBusiness.totalVotes, isRated: true }
-            : b
-        )
-      );
-
       // Show success popup
       setShowRatingSuccess(true);
       setTimeout(() => setShowRatingSuccess(false), 3000);
 
-      // Also refresh from server to ensure consistency
       fetchBusinesses();
     } catch (error) {
       console.error('Error voting for business:', error);
-      alert('Error voting for business. Please try again.');
     }
-  }, [fetchBusinesses]);
+  }, []);
 
   const handleShowDetails = useCallback((business) => {
     setSelectedBusiness(business);
