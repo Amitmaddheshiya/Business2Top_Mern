@@ -7,20 +7,17 @@ export async function POST(request, { params }) {
 
     const { id } = params;
 
-    const business = await Business.findById(id);
+    const business = await Business.findByIdAndUpdate(
+      id,
+      { $inc: { totalVotes: 1 } },
+      { new: true }
+    );
 
     if (!business) {
       return Response.json({ error: 'Business not found' }, { status: 404 });
     }
 
-    console.log('Before increment:', business.totalVotes);
-
-    // Increment vote count
-    business.totalVotes += 1;
-
-    await business.save();
-
-    console.log('After increment:', business.totalVotes);
+    console.log('Vote incremented to:', business.totalVotes);
 
     return Response.json({ totalVotes: business.totalVotes, _id: business._id });
   } catch (error) {
