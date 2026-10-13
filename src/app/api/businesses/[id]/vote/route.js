@@ -5,7 +5,8 @@ export async function POST(request, { params }) {
   try {
     await dbConnect();
 
-    const { id } = params;
+    // Await params in Next.js 15+
+    const { id } = await params;
 
     const business = await Business.findById(id);
 
@@ -13,13 +14,18 @@ export async function POST(request, { params }) {
       return Response.json({ error: 'Business not found' }, { status: 404 });
     }
 
+    console.log('Before increment:', business.totalVotes);
+
     // Increment vote count
     business.totalVotes += 1;
 
     await business.save();
 
-    return Response.json(business);
+    console.log('After increment:', business.totalVotes);
+
+    return Response.json({ totalVotes: business.totalVotes, _id: business._id });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error('Error voting:', error);
+    return Response.json({ error: error.message, details: error.toString() }, { status: 500 });
   }
 }

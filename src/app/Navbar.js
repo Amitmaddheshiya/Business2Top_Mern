@@ -76,7 +76,7 @@ export default function Navbar() {
               href={activeAd.linkUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="md:hidden flex-1 flex items-center gap-2 mx-2"
+              className="md:hidden flex-1 flex items-center gap-2 ml-4 mr-2"
             >
               <img
                 src={activeAd.imageUrl}

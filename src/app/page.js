@@ -106,7 +106,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           {/* Middle: Business Name */}
           <div className="flex-1 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-base sm:text-xl font-bold text-blue-900 font-serif truncate">{cleanName}</h3>
+              <h3 className="text-base sm:text-xl font-bold text-pink-300 font-serif truncate">{cleanName}</h3>
               {business.isVerified && (
                 <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
                   <CheckCircle className="w-3 h-3 text-white" />
@@ -255,12 +255,16 @@ export default function Home() {
         return;
       }
 
+      console.log('Voting for business:', businessId);
+
       const response = await fetch(`/api/businesses/${businessId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
 
       const updatedBusiness = await response.json();
+
+      console.log('API response:', updatedBusiness);
 
       // Update local storage
       votedBusinesses.push(businessId);
@@ -274,6 +278,8 @@ export default function Home() {
             : b
         )
       );
+
+      console.log('State updated with new vote count:', updatedBusiness.totalVotes);
 
       // Show success popup
       setShowRatingSuccess(true);
