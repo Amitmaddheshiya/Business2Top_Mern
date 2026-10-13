@@ -2,11 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Palette } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [ads, setAds] = useState([]);
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
+  const [themeIndex, setThemeIndex] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return parseInt(localStorage.getItem('themeIndex') || '0');
+    }
+    return 0;
+  });
+
+  const handleThemeChange = () => {
+    const newThemeIndex = (themeIndex + 1) % 10;
+    setThemeIndex(newThemeIndex);
+    localStorage.setItem('themeIndex', newThemeIndex.toString());
+    // Dispatch custom event to notify page component
+    window.dispatchEvent(new CustomEvent('themeChange', { detail: newThemeIndex }));
+  };
 
   useEffect(() => {
     fetchAds();
@@ -100,6 +115,14 @@ export default function Navbar() {
             <Link href="/" className="text-charcoal hover:text-gold-600 transition-colors font-medium">
               Home Directory
             </Link>
+            <button
+              onClick={handleThemeChange}
+              className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gold-200 text-charcoal hover:border-gold-500 hover:bg-gold-50 transition-colors"
+              title="Change Theme"
+            >
+              <Palette className="w-4 h-4" />
+              <span className="text-sm font-medium">Theme</span>
+            </button>
           </div>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -125,6 +148,16 @@ export default function Navbar() {
             >
               Home Directory
             </Link>
+            <button
+              onClick={() => {
+                handleThemeChange();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center gap-2 px-3 py-2 text-charcoal hover:text-gold-600 hover:bg-gold-50 rounded-lg transition-colors font-medium"
+            >
+              <Palette className="w-4 h-4" />
+              <span>Change Theme</span>
+            </button>
           </div>
         </div>
       )}

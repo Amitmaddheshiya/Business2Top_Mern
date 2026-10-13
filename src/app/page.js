@@ -1,17 +1,110 @@
 'use client';
 
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, memo, createContext, useContext } from 'react';
 import { Search, Star, Globe, MessageCircle, CheckCircle, Check, Crown, Info } from 'lucide-react';
 import Link from 'next/link';
 
-const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
+// Create Theme Context
+const ThemeContext = createContext({
+  themeIndex: 0,
+  setThemeIndex: () => {}
+});
+
+export const useTheme = () => useContext(ThemeContext);
+
+const BusinessCard = memo(({ business, index, onRate, onShowDetails, themeIndex }) => {
+
   // Clean business name by removing 'office of the' and 'office of'
   const cleanName = business.name
     .replace(/office of the/gi, '')
     .replace(/office of/gi, '')
     .trim();
 
-  // Calculate display rank: use manualRank if set by admin, otherwise use autoRank
+  // 10 Theme configurations
+  const themes = [
+    { // Theme 0: Default
+      cardBg: 'bg-white',
+      headerBg: 'bg-gradient-to-r from-gold-50 to-ivory-50',
+      footerBg: 'bg-gold-50',
+      borderColor: 'border-gold-200',
+      textColor: 'text-charcoal',
+      businessNameColor: 'text-pink-300'
+    },
+    { // Theme 1: Blue
+      cardBg: 'bg-blue-50',
+      headerBg: 'bg-gradient-to-r from-blue-100 to-blue-200',
+      footerBg: 'bg-blue-100',
+      borderColor: 'border-blue-400',
+      textColor: 'text-blue-900',
+      businessNameColor: 'text-blue-400'
+    },
+    { // Theme 2: Purple
+      cardBg: 'bg-purple-50',
+      headerBg: 'bg-gradient-to-r from-purple-100 to-purple-200',
+      footerBg: 'bg-purple-100',
+      borderColor: 'border-purple-400',
+      textColor: 'text-purple-900',
+      businessNameColor: 'text-purple-400'
+    },
+    { // Theme 3: Green
+      cardBg: 'bg-green-50',
+      headerBg: 'bg-gradient-to-r from-green-100 to-green-200',
+      footerBg: 'bg-green-100',
+      borderColor: 'border-green-400',
+      textColor: 'text-green-900',
+      businessNameColor: 'text-green-400'
+    },
+    { // Theme 4: Red
+      cardBg: 'bg-red-50',
+      headerBg: 'bg-gradient-to-r from-red-100 to-red-200',
+      footerBg: 'bg-red-100',
+      borderColor: 'border-red-400',
+      textColor: 'text-red-900',
+      businessNameColor: 'text-red-400'
+    },
+    { // Theme 5: Orange
+      cardBg: 'bg-orange-50',
+      headerBg: 'bg-gradient-to-r from-orange-100 to-orange-200',
+      footerBg: 'bg-orange-100',
+      borderColor: 'border-orange-400',
+      textColor: 'text-orange-900',
+      businessNameColor: 'text-orange-400'
+    },
+    { // Theme 6: Pink
+      cardBg: 'bg-pink-50',
+      headerBg: 'bg-gradient-to-r from-pink-100 to-pink-200',
+      footerBg: 'bg-pink-100',
+      borderColor: 'border-pink-400',
+      textColor: 'text-pink-900',
+      businessNameColor: 'text-pink-400'
+    },
+    { // Theme 7: Teal
+      cardBg: 'bg-teal-50',
+      headerBg: 'bg-gradient-to-r from-teal-100 to-teal-200',
+      footerBg: 'bg-teal-100',
+      borderColor: 'border-teal-400',
+      textColor: 'text-teal-900',
+      businessNameColor: 'text-teal-400'
+    },
+    { // Theme 8: Indigo
+      cardBg: 'bg-indigo-50',
+      headerBg: 'bg-gradient-to-r from-indigo-100 to-indigo-200',
+      footerBg: 'bg-indigo-100',
+      borderColor: 'border-indigo-400',
+      textColor: 'text-indigo-900',
+      businessNameColor: 'text-indigo-400'
+    },
+    { // Theme 9: Gray
+      cardBg: 'bg-gray-100',
+      headerBg: 'bg-gradient-to-r from-gray-200 to-gray-300',
+      footerBg: 'bg-gray-200',
+      borderColor: 'border-gray-400',
+      textColor: 'text-gray-900',
+      businessNameColor: 'text-gray-400'
+    }
+  ];
+
+  const currentTheme = themes[themeIndex];
   const effectiveRank = business.manualRank || business.autoRank;
   const displayRank = Math.ceil(effectiveRank / 10);
   const isTop10 = effectiveRank <= 10;
@@ -26,9 +119,9 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
   const hasRankAndCrown = isRank1 && showCrown && !isElite;
   const hasRankOnly = isRank1 && !showCrown && !isElite;
 
-  let cardTheme = 'bg-white rounded-2xl border border-gold-200 shadow-luxury';
-  let headerTheme = 'bg-gradient-to-r from-gold-50 to-ivory-50 border-b border-gold-100';
-  let footerTheme = 'bg-gold-50 border-t border-gold-100';
+  let cardTheme = `${currentTheme.cardBg} rounded-2xl border ${currentTheme.borderColor} shadow-luxury`;
+  let headerTheme = `${currentTheme.headerBg} border-b ${currentTheme.borderColor}`;
+  let footerTheme = `${currentTheme.footerBg} border-t ${currentTheme.borderColor}`;
   let animatedBorder = false;
   let borderColor = 'border-gray-400';
 
@@ -106,7 +199,7 @@ const BusinessCard = memo(({ business, index, onRate, onShowDetails }) => {
           {/* Middle: Business Name */}
           <div className="flex-1 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-base sm:text-xl font-bold text-pink-300 font-serif truncate">{cleanName}</h3>
+              <h3 className={`text-base sm:text-xl font-bold ${currentTheme.businessNameColor} font-serif truncate`}>{cleanName}</h3>
               {business.isVerified && (
                 <div className="flex items-center gap-1 bg-blue-600 px-2 py-1 rounded-lg shadow-md shadow-blue-500/20 flex-shrink-0">
                   <CheckCircle className="w-3 h-3 text-white" />
@@ -208,6 +301,26 @@ export default function Home() {
   const [showRatingSuccess, setShowRatingSuccess] = useState(false);
   const [selectedBusiness, setSelectedBusiness] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [themeIndex, setThemeIndex] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return parseInt(localStorage.getItem('themeIndex') || '0');
+    }
+    return 0;
+  });
+
+  // Save theme to localStorage
+  useEffect(() => {
+    localStorage.setItem('themeIndex', themeIndex.toString());
+  }, [themeIndex]);
+
+  // Listen for theme change from Navbar
+  useEffect(() => {
+    const handleThemeChange = (event) => {
+      setThemeIndex(event.detail);
+    };
+    window.addEventListener('themeChange', handleThemeChange);
+    return () => window.removeEventListener('themeChange', handleThemeChange);
+  }, []);
 
   const fetchBusinesses = useCallback(async () => {
     setLoading(true);
@@ -295,7 +408,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-ivory-50">
+    <ThemeContext.Provider value={{ themeIndex, setThemeIndex }}>
+      <div className="min-h-screen bg-ivory-50">
       {/* Vote Success Popup */}
       {showRatingSuccess && (
         <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg shadow-green-500/30 animate-bounce">
@@ -393,6 +507,7 @@ export default function Home() {
                 index={index}
                 onRate={handleRate}
                 onShowDetails={handleShowDetails}
+                themeIndex={themeIndex}
               />
             ))}
           </div>
@@ -487,5 +602,6 @@ export default function Home() {
         </div>
       )}
     </div>
+    </ThemeContext.Provider>
   );
 }

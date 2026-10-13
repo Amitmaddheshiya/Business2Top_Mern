@@ -5,8 +5,7 @@ export async function POST(request, { params }) {
   try {
     await dbConnect();
 
-    // Await params in Next.js 15+
-    const { id } = await params;
+    const { id } = params;
 
     const business = await Business.findById(id);
 
